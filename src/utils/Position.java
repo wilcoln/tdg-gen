@@ -1,5 +1,8 @@
 package utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Position {
 
 	private int x = -1;
@@ -31,30 +34,62 @@ public class Position {
 		this.y = y;
 	}
 
-	public double distanceTo(Position pos){
-		return Math.sqrt((this.getX() - pos.getX())^2 - (this.getY() -  pos.getY())^2);
+	public double distanceTo(Position pos) {
+		double dx = this.x - pos.x;
+		double dy = this.y - pos.y;
+		return Math.sqrt(dx*dx + dy*dy);
 	}
-	public Position droite(){
+
+	public Position droite() {
 		return new Position(getX(), getY() + 1);
 	}
-	public Position gauche(){
+
+	public Position gauche() {
 		return new Position(getX(), getY() - 1);
 	}
-	public Position bas(){
-		return new Position(getX() - 1 , getY());
-	}
-	public Position haut(){
+
+	public Position bas() {
 		return new Position(getX() + 1, getY());
 	}
 
-	public String toString(){
-		return "[ " + getX() + ", " + getY() + " ]" ;
+	public Position haut() {
+		return new Position(getX() - 1, getY());
 	}
+
+	public String toString() {
+		return "[ " + getX() + ", " + getY() + " ]";
+	}
+
 	public boolean equals(Position that) {
 		return that != null && this.getX() == that.getX() && this.getY() == that.getY();
 	}
 
-    public boolean isUndefined() {
-		return this.equals(new Position(-1,-1));
-    }
+	public boolean isUndefined() {
+		return this.equals(new Position(-1, -1));
+	}
+
+	public boolean estAGaucheDe(Position that) {
+		return that!= null && this.y < that.y;
+	}
+
+	public boolean estADroiteDe(Position that) {
+		return that!= null && this.y > that.y;
+	}
+
+	public boolean estEnBasDe(Position that) {
+		return that!= null && this.x > that.x;
+	}
+
+	public boolean estEnHautDe(Position that) {
+		return that!= null && this.x < that.x;
+	}
+
+	public List<Position> getAdjacents() {
+		List<Position> adjacents = new ArrayList<>();
+		adjacents.add(this.gauche());
+		adjacents.add(this.droite());
+		adjacents.add(this.haut());
+		adjacents.add(this.bas());
+		return adjacents;
+	}
 }

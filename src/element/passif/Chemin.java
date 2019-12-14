@@ -4,20 +4,13 @@ public class Chemin extends NatureTerrain{
 
 	private int energie;
 	private int volume;
-	private boolean estVisite = false;
 	
-	public Chemin(String label, String name, int energie, int volume) {
-		super(label, name);
+	public Chemin(String symbol, String nom, int energie, int volume) {
+		super(symbol, nom);
 		this.energie = energie;
 		this.volume = volume;
 	}
-	
-	public boolean getEstVisite(){
-		return estVisite;
-	}
-	public void setEstVisite(boolean v){
-		estVisite = v;
-	}
+
 	public int getEnergie() {
 		return energie;
 	}
@@ -36,7 +29,7 @@ public class Chemin extends NatureTerrain{
 
 	@Override
 	public Chemin clone(){
-		return new Chemin(getLabel(), getName(), getEnergie(), getVolume());
+		return new Chemin(getSymbol(), getNom(), getEnergie(), getVolume());
 	}
 
 	

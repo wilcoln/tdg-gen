@@ -1,34 +1,39 @@
 package element.actif;
 
 import element.Element;
+import jeu.Partie;
+import utils.Position;
+import utils.Positionable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Attaquant implements Element {
-	private String name;
+public abstract class Attaquant extends Positionable implements Element {
 	private int energieMax;
 	private int energieMaxActuelle;
 	private int energieDispo;
 	private TactiqueType tactique;
 	private List<Projectile> projectiles;
 
-	public Attaquant(String name, int energieMax, int energieDispo, TactiqueType tactique) {
-		this.name = name;
+	public Attaquant(String nom, int energieMax, int energieDispo, TactiqueType tactique) {
+		super(nom);
 		this.energieMax = energieMax;
 		this.energieMaxActuelle = energieMax;
 		this.energieDispo = energieDispo;
-		this.setTactique(tactique);
+		this.tactique = tactique;
 		projectiles = new ArrayList<>();
 	}
 	public int getEnergieMax() {
 		return energieMax;
 	}
-	public void ajouterEnergieMaxActuelle(int plus){
+	public void augmenterEnergieMaxActuelle(int plus){
 		this.energieMaxActuelle+=plus;
 	}
 	public void diminuerEnergieMaxActuelle(int moins){
 		this.energieMaxActuelle-=moins;
+	}
+	public void diminuerEnergieDispo(int moins){
+		this.energieDispo-=moins;
 	}
 	public void setEnergieMax(int energieMax) {
 		this.energieMax = energieMax;
@@ -40,14 +45,6 @@ public class Attaquant implements Element {
 
 	public void setEnergieDispo(int enerieDispo) {
 		this.energieDispo = enerieDispo;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public TactiqueType getTactique() {
@@ -66,9 +63,21 @@ public class Attaquant implements Element {
 		this.projectiles = projectiles;
 	}
 
-	public void activer() {
-		this.energieDispo = this.energieMaxActuelle;
-
+	public void lancerProjectileSiNecessaire(Partie partie) {
+		Position posEnemiPrio = getPosEnemiPrio(partie);
+		if(posEnemiPrio != null){
+			for (Projectile p: getProjectiles()) {
+				Projectile pc= p.clone();
+				pc.setDepart(getPosition());
+				pc.setArrive(posEnemiPrio);
+				partie.getProjectilesLances().add(pc);
+				// TODO E24 diminuer energieMaxActuelle ou energieDispo ???
+				// diminuerEnergieMaxActuelle(p.getMasse());
+			}
+		}
+	}
+	public void evoluer(){
+		this.energieDispo = this.energieMaxActuelle; // Activation
 	}
 	public int getEnergieMaxActuelle() {
 		return energieMaxActuelle;
@@ -79,9 +88,19 @@ public class Attaquant implements Element {
 	public boolean isElimine() {
 		return energieMaxActuelle <= 0;
 	}
+
+	public Position getPosEnemiPrio(Partie partie) {
+		//TODO E23
+		if (partie.getMobilesPresents().size() > 0)
+			return partie.getMobilesPresents().get(0).getPosition();
+		return null;
+
+	}
+
 	public String getEtat(){
-		return	"nom : " + name + "\n" +
+		return	"nom : " + getNom() + "\n" +
 				"Est Vivant :" + !isElimine() + "\n" +
+				"Position : " + getPosition() + "\n" +
 				"energieMax :" + energieMax + "\n" +
 				"energieMaxActuelle : " + energieMaxActuelle + "\n" +
 				"energieDispo : " + energieDispo + "\n" +

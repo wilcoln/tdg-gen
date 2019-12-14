@@ -2,13 +2,13 @@ package element.passif;
 
 public class Entree extends NatureTerrain{
 
-	public Entree(String label, String name) {
-		super(label, name);
+	public Entree(String symbol, String nom) {
+		super(symbol, nom);
 	}
 
 	@Override
 	public Entree clone(){
-		return new Entree(getLabel(), getName());
+		return new Entree(getSymbol(), getNom());
 	}
 	
 

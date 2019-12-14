@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Jeu {
-	private String name;
+	private String nom;
 	private List<Element> elements;
 	private List<Partie> parties;
 
-	public Jeu(String name) {
-		this.setName(name);
+	public Jeu(String nom) {
+		this.setNom(nom);
 		this.elements = new ArrayList<Element>();
 		this.parties = new ArrayList<Partie>();
 	}
@@ -26,10 +26,10 @@ public class Jeu {
 	public List<Partie> getParties() {
 		return parties;
 	}
-	public String getName() {
-		return name;
+	public String getNom() {
+		return nom;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 }

@@ -1,12 +1,13 @@
 package element.actif;
 
-import element.Element;
 import jeu.Partie;
 import utils.Position;
 import utils.Positionable;
 
-public class Projectile extends Positionable implements Element {
-	private String name;
+import java.util.List;
+
+public class Projectile extends Positionable implements ElementMobile {
+
 	private int masse;
 	private int vitesse;
 	private int portee;
@@ -16,9 +17,8 @@ public class Projectile extends Positionable implements Element {
 	private Position depart;
 	private Position arrive;
 
-	public Projectile(String name, int masse, int vitesse, int portee, int energie) {
-		super();
-		this.name = name;
+	public Projectile(String nom, int masse, int vitesse, int portee, int energie) {
+		super(nom);
 		this.masse = masse;
 		this.vitesse = vitesse;
 		this.portee = portee;
@@ -41,36 +41,16 @@ public class Projectile extends Positionable implements Element {
 		this.arrive = arrive;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public int getMasse() {
 		return masse;
-	}
-
-	public void setMasse(int masse) {
-		this.masse = masse;
 	}
 
 	public int getVitesse() {
 		return vitesse;
 	}
 
-	public void setVitesse(int vitesse) {
-		this.vitesse = vitesse;
-	}
-
 	public int getPortee() {
 		return portee;
-	}
-
-	public void setPortee(int portee) {
-		this.portee = portee;
 	}
 
 	public int getEnergie() {
@@ -81,30 +61,29 @@ public class Projectile extends Positionable implements Element {
 		this.energie = energie;
 	}
 
-	public void activer() {
-		// TODO : implement
-	}
-
 	public void avancer() {
-		if (getPosition().isUndefined())
-			setPosition(depart);
-		else
-			setPosition(getPosition().gauche());
-	}
-
-	public void croiserAttaquant(Attaquant attq) {
-		if (this.energie > attq.getEnergieMaxActuelle()) {
-			this.energie -= attq.getEnergieMaxActuelle();
-			this.poursuivreChemin();
-		} else {
-			this.setElimine(true);
-			attq.setEnergieMaxActuelle(attq.getEnergieMaxActuelle() - this.energie);
+		//TODO E24, P8
+		for (int i = 0; i < vitesse ; i++) {
+			if(depart.estADroiteDe(arrive)){
+				setPosition(getPosition().gauche());
+			}else if(depart.estAGaucheDe(arrive)){
+				setPosition(getPosition().droite());
+			}else if(depart.estEnHautDe(arrive)){
+				setPosition(getPosition().bas());
+			}else if(depart.estEnBasDe(arrive)){
+				setPosition(getPosition().haut());
+			}
 		}
 	}
 
-	private void poursuivreChemin() {
-		// TODO Auto-generated method stub
-
+	public void croiserAttaquant(Attaquant cible) {
+		if (this.energie > cible.getEnergieMaxActuelle()) {
+			this.energie -= cible.getEnergieMaxActuelle();
+			this.avancer();
+		} else {
+			this.setElimine(true);
+			cible.setEnergieMaxActuelle(cible.getEnergieMaxActuelle() - this.energie);
+		}
 	}
 
 	public boolean isElimine() {
@@ -117,7 +96,7 @@ public class Projectile extends Positionable implements Element {
 
 	@Override
 	public Projectile clone() {
-		return new Projectile(name, masse, vitesse, portee, energie);
+		return new Projectile(getNom(), masse, vitesse, portee, energie);
 	}
 
 	@Override
@@ -127,16 +106,32 @@ public class Projectile extends Positionable implements Element {
 		 * "energie :" + energie + "masse : " + masse + "vitesse : " + vitesse +
 		 * "portee : " + portee;
 		 */
-		return getName();
+		return getNom();
 	}
 
 	@Override
 	public void evoluer(Partie partie) {
-		Attaquant at = partie.getAttaquantAt(getPosition());
-		if (at != null) {
-			croiserAttaquant(at);
+		if (getPosition().isUndefined()){
+			setPosition(depart);
 		}
-		avancer();
+		else{
+			Attaquant cible = partie.getAttaquantAt(getPosition());
+			if (cible != null) {
+				croiserAttaquant(cible);
+				if(cible.isElimine() && (cible instanceof Mobile)){
+					partie.getJoueur().gagneBonusEnergie(cible.getEnergieMax());
+				}
+			}
+			if (getPosition().distanceTo(depart) < portee)
+				avancer();
+			else
+				setElimine(true);
+		}
 	}
 
+	@Override
+	public List<Position> positionsAccessibles(Partie partie) {
+		// TODO E14 Décoration, Campement, Chemin, Entree, Sortie
+		return null;
+	}
 }

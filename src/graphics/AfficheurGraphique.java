@@ -2,8 +2,8 @@ package graphics;
 
 import java.io.IOException;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
+
 import jeu.Partie;
 
 public class AfficheurGraphique {
@@ -23,7 +23,7 @@ public class AfficheurGraphique {
 	public AfficheurGraphique(Partie p) throws IOException {
 		frame = new JFrame("TowerDefense Game");
 		partie = p;
-		frame.setBounds(0, 0, partie.getTerrain().getLignes().get(0).getCases().size()*100+200,partie.getTerrain().getLignes().size()*100 + 200);
+		frame.setBounds(0, 0, partie.getTerrain().getLongueur()*100,partie.getTerrain().getLargeur()*108);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		terrainGraphique = new TerrainGraphique(p);
 	}
@@ -32,9 +32,12 @@ public class AfficheurGraphique {
 	 * Initialize the contents of the frame.
 	 */
 
-	public void affiche() {
+	public void afficheTerrain() {
 				frame.setContentPane(terrainGraphique);
 				frame.setVisible(true);
+	}
+	public void afficheDialog(String message){
+		JOptionPane.showMessageDialog(null, message);
 	}
 
 	public void close() {

@@ -3,24 +3,24 @@ package element.passif;
 import element.Element;
 
 public abstract class NatureTerrain implements Element {
-	private String label;
-	private String name;
+	private String nom; // label
+	private String symbol; // name
 	
-	public NatureTerrain(String label, String name) {
-		this.label = label;
-		this.name = name;
+	public NatureTerrain(String symbol, String nom) {
+		this.symbol = symbol;
+		this.nom = nom;
 	}
-	public String getLabel() {
-		return label;
+	public String getNom() {
+		return nom;
 	}
-	public void setLabel(String label) {
-		this.label = label;
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
-	public String getName() {
-		return name;
+	public String getSymbol() {
+		return symbol;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setSymbol(String symbol) {
+		this.symbol = symbol;
 	}
 	
 }

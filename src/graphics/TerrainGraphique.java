@@ -1,7 +1,7 @@
 package graphics;
 
-import element.actif.MobileVague;
-import element.actif.ObstacleVague;
+import element.actif.Mobile;
+import element.actif.Obstacle;
 import element.actif.Projectile;
 import element.passif.Campement;
 import element.passif.Chemin;
@@ -14,16 +14,6 @@ import jeu.Partie;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -51,7 +41,7 @@ public class TerrainGraphique extends JPanel {
 		File img2 = new File(path + "/images/route.jpg");
 		chemin = ImageIO.read(img2);
 
-		File img3 = new File(path + "/images/montagne.jpg");
+		File img3 = new File(path + "/images/montagne.png");
 		decoration = ImageIO.read(img3);
 
 		File img4 = new File(path + "/images/entree.png");
@@ -80,35 +70,34 @@ public class TerrainGraphique extends JPanel {
 		super.paintComponent(g);
 		Graphics g2d = (Graphics2D) g;
 		int next = 100;
-		for (int i = 0; i < terrain.getLignes().size(); i++) {
-			for (int j = 0; j < terrain.getLignes().get(i).getCases().size(); j++) {
-				if (terrain.getLignes().get(i).getCases().get(j) instanceof Chemin) {
+		for (int i = 0; i < terrain.getLargeur(); i++) {
+			for (int j = 0; j < terrain.getLongueur(); j++) {
+				if (terrain.getNatureTerrainAtIndices(i,j) instanceof Chemin) {
 					g2d.drawImage(this.chemin, j * next, i * next, null);
-				} else if (terrain.getLignes().get(i).getCases().get(j) instanceof Decoration) {
+				} else if (terrain.getNatureTerrainAtIndices(i,j) instanceof Decoration) {
 					g2d.drawImage(this.decoration, j * next, i * next, null);
-				} else if (terrain.getLignes().get(i).getCases().get(j) instanceof Entree) {
+				} else if (terrain.getNatureTerrainAtIndices(i,j) instanceof Entree) {
 					g2d.drawImage(this.chemin, j * next, i * next, null);
 					g2d.drawImage(this.entree, j * next, i * next, null);
-				} else if (terrain.getLignes().get(i).getCases().get(j) instanceof Sortie) {
+				} else if (terrain.getNatureTerrainAtIndices(i,j) instanceof Sortie) {
 					g2d.drawImage(this.chemin, j * next, i * next, null);
 					g2d.drawImage(this.sortie, j * next, i * next, null);
-				} else if (terrain.getLignes().get(i).getCases().get(j) instanceof Campement) {
+				} else if (terrain.getNatureTerrainAtIndices(i,j) instanceof Campement) {
 					g2d.drawImage(this.campement, j * next, i * next, null);
 				}
 			}
 		}
 
-		for (ObstacleVague ob : partie.getObstaclesPresents()) {
+		for (Obstacle ob : partie.getObstaclesPresents()) {
 			g2d.drawImage(this.obstacle, (ob.getPosition().getY() - 1) * next, (ob.getPosition().getX() - 1) * next,
 					null);
 		}
-		for (MobileVague mv : partie.getMobilesPresents()) {
-			System.out.println(mv.getPosition() + (partie.getMobilesPresents().size()+""));
-			g2d.drawImage(this.mobile, (mv.getPosition().getY() - 2) * next, (mv.getPosition().getX() - 1) * next,
+		for (Mobile m : partie.getMobilesPresents()) {
+			g2d.drawImage(this.mobile, (m.getPosition().getY() - 1) * next, (m.getPosition().getX() - 1) * next,
 					null);
 		}
 		for (Projectile p : partie.getProjectilesPresents()) {
-			g2d.drawImage(this.projectile, (p.getPosition().getY() - 1) * next, (p.getPosition().getX() - 1) * next,
+			g2d.drawImage(this.projectile, (p.getPosition().getY() - 1) * next + 30, (p.getPosition().getX() - 1) * next + 30,
 					null);
 
 		}

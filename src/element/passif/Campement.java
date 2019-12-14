@@ -2,13 +2,13 @@ package element.passif;
 
 public class Campement extends NatureTerrain{
 
-	public Campement(String label, String name) {
-		super(label, name);
+	public Campement(String symbol, String nom) {
+		super(symbol, nom);
 	}
 
 	@Override
 	public Campement clone(){
-		return new Campement(getLabel(), getName());
+		return new Campement(getSymbol(), getNom());
 	}
 
 }

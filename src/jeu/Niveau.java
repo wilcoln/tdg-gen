@@ -2,7 +2,7 @@ package jeu;
 
 public class Niveau {
 	private String name; 
-	private int dureePause;
+	private int dureePause; // duréee de pause entre les vagues
 	private int energieInitiale; 
 	private int toleranceMobiles;
 	
