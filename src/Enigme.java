@@ -55,12 +55,12 @@ public class Enigme {
 		Mobile mv1 = mb.clone();
 		mv1.setNom("mb1");
 		mv1.setPosEntree(new Position(2, 1));
-		mv1.setPosSortie(new Position(2, 5));
+		mv1.setPosSortie(new Position(3, 5));
 
 		Mobile mv2 = mb.clone();
 		mv2.setNom("mb2");
 		mv2.setPosEntree(new Position(1, 1));
-		mv2.setPosSortie(new Position(2, 5));
+		mv2.setPosSortie(new Position(3, 5));
 
 		Mobile mv3 = mb.clone();
 		mv3.setNom("mb3");
@@ -92,7 +92,7 @@ public class Enigme {
 		Mobile mv5 = mb.clone();
 		mv5.setNom("mb5");
 		mv5.setPosEntree(new Position(2, 1));
-		mv5.setPosSortie(new Position(2, 5));
+		mv5.setPosSortie(new Position(3, 5));
 
 		Mobile mv6 = mb.clone();
 		mv6.setNom("mb6");
@@ -145,7 +145,7 @@ public class Enigme {
 		ligne3.getCases().add(r.clone());
 		ligne3.getCases().add(r.clone());
 		ligne3.getCases().add(g.clone());
-		ligne3.getCases().add(g.clone());
+		ligne3.getCases().add(r.clone());
 
 		terrain.getLignes().add(ligne1);
 		terrain.getLignes().add(ligne2);
