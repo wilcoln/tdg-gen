@@ -13,7 +13,7 @@ public class Enigme {
 		// Définition du jeu
 		Jeu jeu = new Jeu("Enigme");
 		// Définition des élements du  jeu
-		Projectile p = new Projectile("p", 1, 1, 1, 1);
+		Projectile p = new Projectile("p", 1, 1, 1, 4);
 		Mobile mb = new Mobile("mb", 1, 10, 1, 1, TactiqueType.attaquePlusProche);
 		Obstacle o = new Obstacle("o", 10, 1, TactiqueType.attaquePlusFaible);
 		Chemin r = new Chemin("R", "route", 1, 1);
@@ -80,6 +80,10 @@ public class Enigme {
 		ov2.setNom("o2");
 		ov2.setPosition(new Position(3,4));
 
+		Obstacle ov3 = o.clone();
+		ov3.setNom("o3");
+		ov3.setPosition(new Position(2,2));
+
 		Mobile mv4 = mb.clone();
 		mv4.setNom("mb4");
 		mv4.setPosEntree(new Position(1, 1));
@@ -109,6 +113,7 @@ public class Enigme {
 
 		// Ajout des éléments dans la vague
 		vague2.getObstacles().add(ov2);
+		vague2.getObstacles().add(ov3);
 		vague2.getMobiles().add(mv4);
 		vague2.getMobiles().add(mv5);
 		vague2.getMobiles().add(mv6);
