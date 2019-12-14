@@ -49,10 +49,10 @@ public class Partie {
         for (Projectile proj : getProjectilesPresents()) {
             proj.evoluer(this);
         }
-        for (Mobile m : getMobilesPresents()) {
+        for (Attaquant m : getMobilesPresents()) {
             m.evoluer(this);
         }
-        for (Obstacle o : getObstaclesPresents()) {
+        for (Attaquant o : getObstaclesPresents()) {
             o.evoluer(this);
         }
 
@@ -94,8 +94,8 @@ public class Partie {
         return vagues;
     }
 
-    public List<Mobile> getMobilesPresents() {
-        List<Mobile> resultats = new ArrayList<>();
+    public List<Attaquant> getMobilesPresents() {
+        List<Attaquant> resultats = new ArrayList<>();
         if (!isOver()) {
             Vague vagueActuel = vagues.get(indiceVagueActuelle);
             for (Mobile m : vagueActuel.getMobiles()) {
@@ -106,8 +106,8 @@ public class Partie {
         return resultats;
     }
 
-    public List<Obstacle> getObstaclesPresents() {
-        List<Obstacle> resultats = new ArrayList<>();
+    public List<Attaquant> getObstaclesPresents() {
+        List<Attaquant> resultats = new ArrayList<>();
         if (!isOver()) {
             if (vagues.get(indiceVagueActuelle).isLancee()) {
                 for (Obstacle obstacle : vagues.get(indiceVagueActuelle).getObstacles()) {
@@ -169,12 +169,12 @@ public class Partie {
             // Ajout de l'état du terrain en la position
             etat.append(terrain.getNatureTerrainAtPosition(pos).getSymbol() + ": ");
             // Ajout des états des obstacles sur la position
-            for (Obstacle o : getObstaclesPresents()) {
+            for (Attaquant o : getObstaclesPresents()) {
                 if (o.getPosition().equals(pos))
                     etat.append(o.getNom() + " ");
             }
             // Ajout des états des mobiles sur la position
-            for (Mobile m : getMobilesPresents()) {
+            for (Attaquant m : getMobilesPresents()) {
                 if (m.getPosition().equals(pos))
                     etat.append(m.getNom() + " ");
 
@@ -190,7 +190,7 @@ public class Partie {
 
     public List<Attaquant> getMobilesAt(Position position) {
         List<Attaquant> mobiles = new ArrayList<>();
-        for (Mobile mobile : getMobilesPresents()) {
+        for (Attaquant mobile : getMobilesPresents()) {
             if (mobile.getPosition().equals(position))
                 mobiles.add(mobile);
         }
@@ -199,7 +199,7 @@ public class Partie {
 
     public List<Attaquant> getObstaclesAt(Position position) {
         List<Attaquant> obstacles = new ArrayList<>();
-        for (Obstacle obstacle : getObstaclesPresents()) {
+        for (Attaquant obstacle : getObstaclesPresents()) {
             if (obstacle.getPosition().equals(position))
                 obstacles.add(obstacle);
         }

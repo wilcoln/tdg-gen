@@ -84,7 +84,7 @@ public class Mobile extends Attaquant implements ElementMobile {
 	}
 
 	private Position meilleurePositionSuivante(Partie partie) {
-		//TODO E14, E17, E19, P22, P23
+		//TODO E14, E17, E19, P22, P23  => OK
 		if(positionsAccessibles(partie).size() > 0){
 			Position meilleurePos = positionsAccessibles(partie).get(0);
 			for(Position position: positionsAccessibles(partie)){
@@ -104,14 +104,6 @@ public class Mobile extends Attaquant implements ElementMobile {
 	@Override
 	public AttaquantType getType() {
 		return AttaquantType.MOBILE;
-	}
-
-	@Override
-	public Attaquant getEnemiPrio(Partie partie) {
-		//TODO E23
-		if (partie.getObstaclesPresents().size() > 0)
-			return partie.getObstaclesPresents().get(0);
-		return null;
 	}
 
 	@Override

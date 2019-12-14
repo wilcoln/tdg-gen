@@ -64,7 +64,12 @@ public abstract class Attaquant extends Positionable implements Element {
 	}
 
 	public void lancerProjectileSiNecessaire(Partie partie) {
-		Attaquant cible = getEnemiPrio(partie);
+		Attaquant cible;
+		if(getType().equals(AttaquantType.MOBILE))
+			 cible = getEnemiPrio(partie.getObstaclesPresents());
+		else
+			cible = getEnemiPrio(partie.getMobilesPresents());
+
 		if(cible != null){
 			for (Projectile p: getProjectiles()) {
 				Projectile pc= p.clone();
@@ -90,7 +95,39 @@ public abstract class Attaquant extends Positionable implements Element {
 		return energieMaxActuelle <= 0;
 	}
 
-	public abstract Attaquant getEnemiPrio(Partie partie);
+	public Attaquant getEnemiPrio(List<Attaquant> enemisPresents){
+		if (enemisPresents.size() > 0) {
+			Attaquant enemiPrio = enemisPresents.get(0);
+			switch (getTactique()){
+				case attaquePlusFaible:
+					int energieMaxMin = enemiPrio.getEnergieMax();
+					for(Attaquant enemi: enemisPresents)
+						if(enemi.getEnergieMax() < energieMaxMin){
+							energieMaxMin = enemi.getEnergieMax();
+							enemiPrio = enemi;
+						}
+					break;
+				case attaquePlusFort:
+					int energieMaxMax = enemiPrio.getEnergieMax();
+					for(Attaquant enemi: enemisPresents)
+						if(enemi.getEnergieMax() > energieMaxMax){
+							energieMaxMax = enemi.getEnergieMax();
+							enemiPrio = enemi;
+						}
+					break;
+				case attaquePlusProche:
+					double distanceMin = enemiPrio.getEnergieMax();
+					for(Attaquant enemi: enemisPresents)
+						if(enemi.getPosition().distanceTo(getPosition()) < distanceMin){
+							distanceMin = enemi.getPosition().distanceTo(getPosition());
+							enemiPrio = enemi;
+						}
+					break;
+			}
+			return enemiPrio;
+		}
+		return null;
+	}
 
 	public String getEtat(){
 		return	"nom : " + getNom() + "\n" +

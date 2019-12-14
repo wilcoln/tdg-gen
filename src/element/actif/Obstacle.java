@@ -21,14 +21,6 @@ public class Obstacle extends Attaquant{
 	}
 
 	@Override
-	public Attaquant getEnemiPrio(Partie partie) {
-		//TODO E23
-		if (partie.getMobilesPresents().size() > 0)
-			return partie.getMobilesPresents().get(0);
-		return null;
-	}
-
-	@Override
 	public void evoluer(Partie partie) {
 		super.evoluer();
 		lancerProjectileSiNecessaire(partie);

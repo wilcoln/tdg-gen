@@ -1,5 +1,6 @@
 package graphics;
 
+import element.actif.Attaquant;
 import element.actif.Mobile;
 import element.actif.Obstacle;
 import element.actif.Projectile;
@@ -88,11 +89,11 @@ public class TerrainGraphique extends JPanel {
 			}
 		}
 
-		for (Obstacle ob : partie.getObstaclesPresents()) {
+		for (Attaquant ob : partie.getObstaclesPresents()) {
 			g2d.drawImage(this.obstacle, (ob.getPosition().getY() - 1) * next, (ob.getPosition().getX() - 1) * next,
 					null);
 		}
-		for (Mobile m : partie.getMobilesPresents()) {
+		for (Attaquant m : partie.getMobilesPresents()) {
 			g2d.drawImage(this.mobile, (m.getPosition().getY() - 1) * next, (m.getPosition().getX() - 1) * next,
 					null);
 		}
