@@ -75,7 +75,7 @@ public class Mobile extends Attaquant implements ElementMobile {
 					if(nnt instanceof Chemin){
 						int moinsEnergie = ((Chemin)nnt).getEnergie();
 						// TODO E15 diminuer energieMaxActuelle ou energieDispo ???
-						//  diminuerEnergieMaxActuelle(moinsEnergie);
+						diminuerEnergieMaxActuelle(moinsEnergie);
 					}
 					setPosition(np);
 				}
@@ -97,8 +97,21 @@ public class Mobile extends Attaquant implements ElementMobile {
 	}
 
 	public boolean peutEntrer(Partie partie) {
-		//TODO P5
-		return true;
+		// P5
+		return partie.getMobilesAt(posEntree).size() == 0;
+	}
+
+	@Override
+	public AttaquantType getType() {
+		return AttaquantType.MOBILE;
+	}
+
+	@Override
+	public Attaquant getEnemiPrio(Partie partie) {
+		//TODO E23
+		if (partie.getObstaclesPresents().size() > 0)
+			return partie.getObstaclesPresents().get(0);
+		return null;
 	}
 
 	@Override
@@ -126,8 +139,12 @@ public class Mobile extends Attaquant implements ElementMobile {
 		NatureTerrain nnt;
 		for(Position adjacent : getPosition().getAdjacents()){
 			nnt = partie.getTerrain().getNatureTerrainAtPosition(adjacent);
-			if(nnt instanceof Chemin || nnt instanceof Entree || nnt instanceof Sortie)
+			if(nnt instanceof Entree || nnt instanceof Sortie)
 				resultats.add(adjacent);
+			else if(nnt instanceof Chemin){
+				if(((Chemin) nnt).getVolume() - partie.getVolumeOccupeAt(adjacent) >= volume)
+					resultats.add(adjacent);
+			}
 		}
 		return resultats;
 	}

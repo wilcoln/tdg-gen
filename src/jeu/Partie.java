@@ -109,7 +109,6 @@ public class Partie {
     public List<Obstacle> getObstaclesPresents() {
         List<Obstacle> resultats = new ArrayList<>();
         if (!isOver()) {
-            // TODO : Dire si....
             if (vagues.get(indiceVagueActuelle).isLancee()) {
                 for (Obstacle obstacle : vagues.get(indiceVagueActuelle).getObstacles()) {
                     if (!obstacle.isElimine()) {
@@ -189,20 +188,33 @@ public class Partie {
         return etat.toString();
     }
 
-    public Attaquant getAttaquantAt(Position position) {
+    public List<Attaquant> getMobilesAt(Position position) {
+        List<Attaquant> mobiles = new ArrayList<>();
         for (Mobile mobile : getMobilesPresents()) {
             if (mobile.getPosition().equals(position))
-                return mobile;
+                mobiles.add(mobile);
         }
-        return null;
+        return mobiles;
     }
 
-    public void recommencer() {
-        // TODO
-
+    public List<Attaquant> getObstaclesAt(Position position) {
+        List<Attaquant> obstacles = new ArrayList<>();
+        for (Obstacle obstacle : getObstaclesPresents()) {
+            if (obstacle.getPosition().equals(position))
+                obstacles.add(obstacle);
+        }
+        return obstacles;
     }
 
     public List<Projectile> getProjectilesLances() {
         return projectilesLances;
+    }
+
+    public int getVolumeOccupeAt(Position pos) {
+        int resultat = 0;
+        for (Attaquant mobile: getMobilesAt(pos)) {
+            resultat += ((Mobile)mobile).getVolume();
+        }
+        return resultat;
     }
 }

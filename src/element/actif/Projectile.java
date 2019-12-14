@@ -14,6 +14,7 @@ public class Projectile extends Positionable implements ElementMobile {
 	private int energie;
 	private boolean elimine;
 
+	private AttaquantType typeCible;
 	private Position depart;
 	private Position arrive;
 
@@ -76,6 +77,14 @@ public class Projectile extends Positionable implements ElementMobile {
 		}
 	}
 
+	public AttaquantType getTypeCible() {
+		return typeCible;
+	}
+
+	public void setTypeCible(AttaquantType typeCible) {
+		this.typeCible = typeCible;
+	}
+
 	public void croiserAttaquant(Attaquant cible) {
 		if (this.energie > cible.getEnergieMaxActuelle()) {
 			this.energie -= cible.getEnergieMaxActuelle();
@@ -115,11 +124,17 @@ public class Projectile extends Positionable implements ElementMobile {
 			setPosition(depart);
 		}
 		else{
-			Attaquant cible = partie.getAttaquantAt(getPosition());
-			if (cible != null) {
-				croiserAttaquant(cible);
-				if(cible.isElimine() && (cible instanceof Mobile)){
-					partie.getJoueur().gagneBonusEnergie(cible.getEnergieMax());
+			List<Attaquant> victimesPossibles;
+			if(typeCible == AttaquantType.MOBILE)
+				victimesPossibles = partie.getMobilesAt(getPosition());
+			else
+				victimesPossibles = partie.getObstaclesAt(getPosition());
+
+			if (victimesPossibles.size() > 0) {
+				Attaquant victime = victimesPossibles.get(0);
+				croiserAttaquant(victime);
+				if(victime.isElimine() && (victime instanceof Mobile)){
+					partie.getJoueur().gagneBonusEnergie(victime.getEnergieMax());
 				}
 			}
 			if (getPosition().distanceTo(depart) < portee)

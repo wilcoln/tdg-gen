@@ -14,8 +14,8 @@ public class Enigme {
 		Jeu jeu = new Jeu("Enigme");
 		// Définition des élements du  jeu
 		Projectile p = new Projectile("p", 1, 1, 1, 1);
-		Mobile mb = new Mobile("mb", 1, 1, 1, 1, TactiqueType.attaquePlusProche);
-		Obstacle o = new Obstacle("o", 1, 1, TactiqueType.attaquePlusFaible);
+		Mobile mb = new Mobile("mb", 1, 10, 1, 1, TactiqueType.attaquePlusProche);
+		Obstacle o = new Obstacle("o", 10, 1, TactiqueType.attaquePlusFaible);
 		Chemin r = new Chemin("R", "route", 1, 1);
 		Decoration m = new Decoration("M", "montagne");
 		Campement g = new Campement("G", "garage");
@@ -39,7 +39,7 @@ public class Enigme {
 		Partie partie = new Partie();
 
 		// Définition du niveau
-		Niveau niveau = new Niveau("Unique Level", 2, 0, 3);
+		Niveau niveau = new Niveau("Unique Level", 2, 0, 4);
 		// Ajout du niveau à la partie
 		partie.getNiveaux().add(niveau);
 
@@ -59,7 +59,7 @@ public class Enigme {
 
 		Mobile mv2 = mb.clone();
 		mv2.setNom("mb2");
-		mv2.setPosEntree(new Position(2, 1));
+		mv2.setPosEntree(new Position(1, 1));
 		mv2.setPosSortie(new Position(2, 5));
 
 		Mobile mv3 = mb.clone();
@@ -82,7 +82,7 @@ public class Enigme {
 
 		Mobile mv4 = mb.clone();
 		mv4.setNom("mb4");
-		mv4.setPosEntree(new Position(2, 1));
+		mv4.setPosEntree(new Position(1, 1));
 		mv4.setPosSortie(new Position(2, 5));
 
 		Mobile mv5 = mb.clone();
@@ -92,14 +92,28 @@ public class Enigme {
 
 		Mobile mv6 = mb.clone();
 		mv6.setNom("mb6");
-		mv6.setPosEntree(new Position(2, 1));
+		mv6.setPosEntree(new Position(1, 1));
 		mv6.setPosSortie(new Position(2, 5));
+
+		Mobile mv7 = mb.clone();
+		mv7.setNom("mb6");
+		mv7.setPosEntree(new Position(2, 1));
+		mv7.setPosSortie(new Position(2, 5));
+
+		Mobile mv8 = mb.clone();
+		mv8.setNom("mb6");
+		mv8.setPosEntree(new Position(1, 1));
+		mv8.setPosSortie(new Position(2, 5));
+
+
 
 		// Ajout des éléments dans la vague
 		vague2.getObstacles().add(ov2);
 		vague2.getMobiles().add(mv4);
 		vague2.getMobiles().add(mv5);
 		vague2.getMobiles().add(mv6);
+		vague2.getMobiles().add(mv7);
+		vague2.getMobiles().add(mv8);
 		// ajout de la vague à la partie
 		partie.getVagues().add(vague2);
 
@@ -108,8 +122,8 @@ public class Enigme {
 
 		// Définition des lignes de la partie
 		Ligne ligne1 = new Ligne();
-		ligne1.getCases().add(m.clone());
-		ligne1.getCases().add(m.clone());
+		ligne1.getCases().add(r.clone());
+		ligne1.getCases().add(r.clone());
 		ligne1.getCases().add(m.clone());
 		ligne1.getCases().add(m.clone());
 		ligne1.getCases().add(m.clone());
@@ -144,7 +158,6 @@ public class Enigme {
 //			try {
 //				i = sc.nextInt();
 //			} catch (Exception e2) {
-//				// TODO Auto-generated catch block
 //				e2.printStackTrace();
 //			}
 //			switch (i) {

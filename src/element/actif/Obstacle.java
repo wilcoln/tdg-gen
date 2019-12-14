@@ -1,6 +1,7 @@
 package element.actif;
 
 import jeu.Partie;
+import utils.Position;
 
 public class Obstacle extends Attaquant{
 
@@ -8,10 +9,23 @@ public class Obstacle extends Attaquant{
 		super(nom, energieMax, enerieDispo, tactique);
 	}
 
+	@Override
+	public AttaquantType getType() {
+		return AttaquantType.OBSTACLE;
+	}
+
 	// P9
 	public void reparer() {
 		// TODO P9 : à raffiner
 		this.setEnergieMaxActuelle(this.getEnergieMaxActuelle()+1);
+	}
+
+	@Override
+	public Attaquant getEnemiPrio(Partie partie) {
+		//TODO E23
+		if (partie.getMobilesPresents().size() > 0)
+			return partie.getMobilesPresents().get(0);
+		return null;
 	}
 
 	@Override

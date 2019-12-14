@@ -58,21 +58,22 @@ public abstract class Attaquant extends Positionable implements Element {
 	public List<Projectile> getProjectiles() {
 		return projectiles;
 	}
-
+	public abstract AttaquantType getType();
 	public void setProjectiles(List<Projectile> projectiles) {
 		this.projectiles = projectiles;
 	}
 
 	public void lancerProjectileSiNecessaire(Partie partie) {
-		Position posEnemiPrio = getPosEnemiPrio(partie);
-		if(posEnemiPrio != null){
+		Attaquant cible = getEnemiPrio(partie);
+		if(cible != null){
 			for (Projectile p: getProjectiles()) {
 				Projectile pc= p.clone();
 				pc.setDepart(getPosition());
-				pc.setArrive(posEnemiPrio);
+				pc.setArrive(cible.getPosition());
+				pc.setTypeCible(cible.getType());
 				partie.getProjectilesLances().add(pc);
 				// TODO E24 diminuer energieMaxActuelle ou energieDispo ???
-				// diminuerEnergieMaxActuelle(p.getMasse());
+				diminuerEnergieMaxActuelle(p.getMasse());
 			}
 		}
 	}
@@ -89,13 +90,7 @@ public abstract class Attaquant extends Positionable implements Element {
 		return energieMaxActuelle <= 0;
 	}
 
-	public Position getPosEnemiPrio(Partie partie) {
-		//TODO E23
-		if (partie.getMobilesPresents().size() > 0)
-			return partie.getMobilesPresents().get(0).getPosition();
-		return null;
-
-	}
+	public abstract Attaquant getEnemiPrio(Partie partie);
 
 	public String getEtat(){
 		return	"nom : " + getNom() + "\n" +

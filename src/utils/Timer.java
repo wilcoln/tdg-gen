@@ -5,7 +5,6 @@ public final class Timer {
         try {
 			Thread.sleep(millis);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
