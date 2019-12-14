@@ -77,7 +77,7 @@ public abstract class Attaquant extends Positionable implements Element {
 				pc.setArrive(cible.getPosition());
 				pc.setTypeCible(cible.getType());
 				partie.getProjectilesLances().add(pc);
-				// TODO E24 diminuer energieMaxActuelle ou energieDispo ???
+				// TODO E24 diminuer energieMaxActuelle ou energieDispo ??? => OK
 				diminuerEnergieMaxActuelle(p.getMasse());
 			}
 		}

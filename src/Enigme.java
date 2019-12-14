@@ -13,8 +13,8 @@ public class Enigme {
 		// Définition du jeu
 		Jeu jeu = new Jeu("Enigme");
 		// Définition des élements du  jeu
-		Projectile p = new Projectile("p", 1, 1, 1, 4);
-		Mobile mb = new Mobile("mb", 1, 10, 1, 1, TactiqueType.attaquePlusProche);
+		Projectile p = new Projectile("p", 1, 1, 1, 5);
+		Mobile mb = new Mobile("mb", 1, 20, 1, 1, TactiqueType.attaquePlusProche);
 		Obstacle o = new Obstacle("o", 10, 1, TactiqueType.attaquePlusFaible);
 		Chemin r = new Chemin("R", "route", 1, 1);
 		Decoration m = new Decoration("M", "montagne");

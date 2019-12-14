@@ -35,6 +35,8 @@ public class Position {
 	}
 
 	public double distanceTo(Position pos) {
+		if(pos == null)
+			return Double.POSITIVE_INFINITY;
 		double dx = this.x - pos.x;
 		double dy = this.y - pos.y;
 		return Math.sqrt(dx*dx + dy*dy);

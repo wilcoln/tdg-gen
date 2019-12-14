@@ -63,7 +63,7 @@ public class Projectile extends Positionable implements ElementMobile {
 	}
 
 	public void avancer() {
-		//TODO E24, P8
+		//TODO E24, P8 => OK , pas de déplacement en diag
 		for (int i = 0; i < vitesse ; i++) {
 			if(depart.estADroiteDe(arrive)){
 				setPosition(getPosition().gauche());
