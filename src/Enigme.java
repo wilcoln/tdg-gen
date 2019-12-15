@@ -12,10 +12,15 @@ public class Enigme {
 	public static void main(String[] args) throws IOException {
 		// Définition du jeu
 		Jeu jeu = new Jeu("Enigme");
+		
+		// Définition d'une partie
+		Partie partie = new Partie();
+
 		// Définition des élements du  jeu
 		Projectile p = new Projectile("p", 1, 1, 1, 5);
 		Mobile mb = new Mobile("mb", 1, 20, 1, 1, TactiqueType.attaquePlusProche);
 		Obstacle o = new Obstacle("o", 10, 1, TactiqueType.attaquePlusFaible);
+		partie.getObstaclesDispoPourVente().add(o);
 		Chemin r = new Chemin("R", "route", 1, 1);
 		Decoration m = new Decoration("M", "montagne");
 		Campement g = new Campement("G", "garage");
@@ -24,6 +29,7 @@ public class Enigme {
 
 		//Affectation des projectiles aux attaquants
 		o.getProjectiles().add(p.clone());
+		
 		// Ajout des élements dans la liste des élts du jeu
 		jeu.getElements().add(p.clone());
 		jeu.getElements().add(mb.clone());
@@ -33,10 +39,6 @@ public class Enigme {
 		jeu.getElements().add(g.clone());
 		jeu.getElements().add(e.clone());
 		jeu.getElements().add(s.clone());
-
-
-		// Définition d'une partie
-		Partie partie = new Partie();
 
 		// Définition du niveau
 		Niveau niveau = new Niveau("Unique Level", 2, 0, 4);

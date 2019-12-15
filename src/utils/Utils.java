@@ -1,7 +1,5 @@
 package utils;
 
-import javafx.geometry.Pos;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

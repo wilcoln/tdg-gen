@@ -17,7 +17,7 @@ import jeu.Partie;
 public class PauseVendreReparer {
 
 	private JFrame frame;
-	private JComboBox obstaclesPlaces;
+	private JComboBox obstacles;
 	private Partie partie;
 
 	/**
@@ -38,15 +38,15 @@ public class PauseVendreReparer {
 		JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout());
 
-		obstaclesPlaces = new JComboBox(partie.getObstaclesPresents().toArray());
-		panel.add(obstaclesPlaces);
+		obstacles = new JComboBox(partie.getObstaclesPresents().toArray());
+		panel.add(obstacles);
 
 		JButton bouton = new JButton("Valider");
 		bouton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				partie.afficheur.getAfficheurGraphique().getTerrainGraphique()
-						.setObstaclePause((Obstacle) obstaclesPlaces.getSelectedItem());
+						.setObstaclePause(((Obstacle) obstacles.getSelectedItem()));
 				frame.setVisible(false);
 			}
 		});
