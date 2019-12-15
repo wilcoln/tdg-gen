@@ -1,12 +1,13 @@
 package element.actif;
 
+import element.Element;
 import jeu.Partie;
 import utils.Position;
 import utils.Positionable;
 
 import java.util.List;
 
-public class Projectile extends Positionable implements ElementMobile {
+public class Projectile extends Positionable implements Element {
 
 	private int masse;
 	private int vitesse;
@@ -142,11 +143,5 @@ public class Projectile extends Positionable implements ElementMobile {
 			else
 				setElimine(true);
 		}
-	}
-
-	@Override
-	public List<Position> positionsAccessibles(Partie partie) {
-		// TODO E14 Décoration, Campement, Chemin, Entree, Sortie
-		return null;
 	}
 }

@@ -5,6 +5,7 @@ import element.actif.*;
 import utils.Position;
 import element.passif.Terrain;
 import utils.Timer;
+import utils.Utils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,7 +33,6 @@ public class Partie {
     public void commencer() throws IOException {
         joueur = new Joueur(this);
         afficheur = new Afficheur(this);
-
         afficheur.affichageDebutPartie();
         while (!isOver()) {
             evoluer();

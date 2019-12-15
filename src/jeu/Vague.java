@@ -37,6 +37,7 @@ public class Vague {
         if(!attenteInitailisee){
             debutAttente = System.currentTimeMillis();
             attenteInitailisee = true;
+            calculCheminDesMobiles(partie);
         }else{
             Long attente = System.currentTimeMillis() - debutAttente;
             if(partie.indiceVagueActuelle > 0 && attente < partie.getNiveaux().get(partie.indiceNiveauActuel).getDureePause() * 1000){
@@ -52,6 +53,12 @@ public class Vague {
             }
         }
 
+    }
+
+    private void calculCheminDesMobiles(Partie partie) {
+        for (Mobile mobile: mobiles) {
+            mobile.calculChemin(partie);
+        }
     }
 
     public List<Obstacle> getObstacles() {

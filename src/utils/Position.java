@@ -94,4 +94,8 @@ public class Position {
 		adjacents.add(this.bas());
 		return adjacents;
 	}
+	@Override
+	public int hashCode(){
+		return 63 * x + y;
+	}
 }

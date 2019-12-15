@@ -1,4 +1,4 @@
 ./clean.sh
 cd src/
-javac *.java
+javac *.java */*.java
 java Enigme
