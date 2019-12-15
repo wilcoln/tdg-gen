@@ -33,14 +33,28 @@ public class AfficheurGraphique {
 	 */
 
 	public void afficheTerrain() {
-				frame.setContentPane(terrainGraphique);
-				frame.setVisible(true);
+		frame.setContentPane(terrainGraphique);
+		frame.setVisible(true);
 	}
+	
+	public void activerPause() {
+		terrainGraphique.activerPause();
+	}
+	
 	public void afficheDialog(String message){
 		JOptionPane.showMessageDialog(null, message);
 	}
 
 	public void close() {
 		System.exit(0);
+	}
+
+	public TerrainGraphique getTerrainGraphique() {
+		// TODO Auto-generated method stub
+		return this.terrainGraphique;
+	}
+
+	public void desactiverPause() {
+		this.terrainGraphique.desactiverPause();
 	}
 }
