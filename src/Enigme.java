@@ -17,7 +17,7 @@ public class Enigme {
 		Partie partie = new Partie();
 
 		// Définition des élements du  jeu
-		Projectile p1 = new Projectile("p1", 1, 1, 1, 5);
+		Projectile p1 = new Projectile("p1", 1, 2, 4, 20);
 		Projectile p2 = new Projectile("p2", 1, 1, 1, 5);
 		Mobile mb = new Mobile("mb", 1, 20, 1, 1, TactiqueType.attaquePlusProche);
 		Obstacle o = new Obstacle("o", 10, 1, TactiqueType.attaquePlusFaible);

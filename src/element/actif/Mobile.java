@@ -72,7 +72,9 @@ public class Mobile extends Attaquant{
 						diminuerEnergieMaxActuelle(moinsEnergie);
 					}
 					setPosition(chemin.get(indiceProchainePosition));
-					indiceProchainePosition++;
+					if(indiceProchainePosition+vitesse < chemin.size())
+						indiceProchainePosition+=vitesse;
+					else indiceProchainePosition++;
 				}
 			}
 		}
