@@ -13,50 +13,17 @@ public class Vague {
 	private boolean attenteInitailisee;
 	private Long debutAttente;
 	private boolean lancee;
+	private int indiceProchainMobile;
 
-	public int getIndiceProchainMobile() {
+    public int getIndiceProchainMobile() {
 		return indiceProchainMobile;
 	}
 
 	public void setIndiceProchainMobile(int indiceProchainMobile) {
 		this.indiceProchainMobile = indiceProchainMobile;
 	}
-
-	private int indiceProchainMobile;
-
-	public Vague(int energieJoueur) {
-
-		this.energieJoueur = energieJoueur;
-		this.mobiles = new ArrayList<>();
-		this.obstacles = new ArrayList<>();
-		indiceProchainMobile = 0; // Aucun mobile déployé au début
-	}
-
 	// P5,P6
-	public void deployerMobiles(Partie partie) {
-		if (!attenteInitailisee) {
-			partie.afficheur.activerPause();
-			debutAttente = System.currentTimeMillis();
-			attenteInitailisee = true;
-			calculCheminDesMobiles(partie);
-		} else {
-			partie.afficheur.desactiverPauseIfActivee();
-			Long attente = System.currentTimeMillis() - debutAttente;
-			if (partie.indiceVagueActuelle > 0
-					&& attente < partie.getNiveaux().get(partie.indiceNiveauActuel).getDureePause() * 1000) {
-				return;
-			} else {
-				lancee = true;
-				if (indiceProchainMobile < mobiles.size()) {
-					if (mobiles.get(indiceProchainMobile).peutEntrer(partie)) {
-						mobiles.get(indiceProchainMobile).entrer();
-						indiceProchainMobile++;
-					}
-				}
-			}
-		}
 
-	}
 
 	private void calculCheminDesMobiles(Partie partie) {
 		for (Mobile mobile : mobiles) {
@@ -67,14 +34,46 @@ public class Vague {
 	public List<Obstacle> getObstacles() {
 		return obstacles;
 	}
+    public Vague(int energieJoueur) {
 
-	public List<Mobile> getMobiles() {
-		return mobiles;
-	}
+        this.energieJoueur = energieJoueur;
+        this.mobiles = new ArrayList<>();
+        this.obstacles = new ArrayList<>();
+        indiceProchainMobile = 0; // Aucun mobile déployé au début
+    }
 
-	public int getEnergieJoueur() {
-		return energieJoueur;
-	}
+    // P5,P6
+    public void deployerMobiles(Partie partie) {
+        if(!attenteInitailisee){
+            if(partie.indiceVagueActuelle > 0)
+                partie.afficheur.activerPause();
+            attenteInitailisee = true;
+            calculCheminDesMobiles(partie);
+            debutAttente = System.currentTimeMillis();
+        }else{
+            long attente = System.currentTimeMillis() - debutAttente;
+            if (attente >= partie.getNiveaux().get(partie.indiceNiveauActuel).getDureePause() * 10000) {
+                partie.afficheur.desactiverPauseIfActivee();
+                lancee = true;
+                if (indiceProchainMobile < mobiles.size()) {
+                    if (mobiles.get(indiceProchainMobile).peutEntrer(partie)) {
+                        mobiles.get(indiceProchainMobile).entrer();
+                        indiceProchainMobile++;
+                    }
+                }
+            }
+        }
+
+    }
+
+    public List<Mobile> getMobiles() {
+        return mobiles;
+    }
+
+    public int getEnergieJoueur() {
+        return energieJoueur;
+    }
+
 
 	public boolean echouee(Partie partie) {
 		return mobilesTousEliminesOuSortis() && !partie.defaiteJoueur();
