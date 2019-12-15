@@ -35,10 +35,12 @@ public class Vague {
     // P5,P6
     public void deployerMobiles(Partie partie) {
         if(!attenteInitailisee){
+            partie.afficheur.activerPause();
             debutAttente = System.currentTimeMillis();
             attenteInitailisee = true;
             calculCheminDesMobiles(partie);
         }else{
+            partie.afficheur.desactiverPauseIfActivee();
             Long attente = System.currentTimeMillis() - debutAttente;
             if(partie.indiceVagueActuelle > 0 && attente < partie.getNiveaux().get(partie.indiceNiveauActuel).getDureePause() * 1000){
                 return;
