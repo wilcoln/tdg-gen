@@ -115,15 +115,18 @@ public class TerrainGraphique extends JPanel {
 		});
 		this.deplacer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
+				PauseDeplacer pause = new PauseDeplacer(partie);
 				partie.getJoueur().deplacerObstacle(obstaclePause,positionDeDep);
 			}
 		});
 		this.vendre.addActionListener((ActionListener) new ActionListener() {
+			PauseVendreReparer pause = new PauseVendreReparer(partie);
 			public void actionPerformed(ActionEvent event) {
 				partie.getJoueur().vendreObstacle(obstaclePause);
 			}
 		});
 		this.reparer.addActionListener(new ActionListener() {
+			PauseVendreReparer pause = new PauseVendreReparer(partie);
 			public void actionPerformed(ActionEvent event) {
 				partie.getJoueur().reparerObstacle(obstaclePause);
 

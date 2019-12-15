@@ -35,7 +35,7 @@ public class PauseDeplacer {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 100, 50);
+		frame.setBounds(100, 100, 200, 100);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout());
@@ -64,6 +64,7 @@ public class PauseDeplacer {
 			}
 		});
 		panel.add(bouton);
+		frame.setContentPane(panel);
 		frame.setVisible(true);
 
 	}

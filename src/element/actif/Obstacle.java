@@ -19,7 +19,10 @@ public class Obstacle extends Attaquant{
 		// TODO P9 : ok
 		this.setEnergieMaxActuelle(this.getEnergieMax());
 	}
-
+	
+	public String toString() {
+		return this.getNom();
+	}
 	@Override
 	public Obstacle clone(){
 		Obstacle same = new Obstacle(getNom(), getEnergieMax(), getEnergieDispo(), getTactique());
