@@ -42,7 +42,7 @@ public class Vague {
             debutAttente = System.currentTimeMillis();
         }else{
             long attente = System.currentTimeMillis() - debutAttente;
-            if (attente >= partie.getNiveaux().get(partie.indiceNiveauActuel).getDureePause() * 1000) {
+            if (partie.indiceVagueActuelle == 0 || attente >= partie.getNiveaux().get(partie.indiceNiveauActuel).getDureePause() * 1000) {
                 partie.afficheur.desactiverPauseIfActivee();
                 lancee = true;
                 if (indiceProchainMobile < mobiles.size()) {
