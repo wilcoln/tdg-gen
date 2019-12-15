@@ -16,8 +16,8 @@ public class Obstacle extends Attaquant{
 
 	// P9
 	public void reparer() {
-		// TODO P9 : à raffiner
-		this.setEnergieMaxActuelle(this.getEnergieMaxActuelle()+1);
+		// TODO P9 : ok
+		this.setEnergieMaxActuelle(this.getEnergieMax());
 	}
 
 	@Override
