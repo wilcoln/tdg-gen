@@ -12,6 +12,7 @@ public class Afficheur {
     private String etatCourant = "";
     private String etatPrec = "";
     private Partie partie;
+    private boolean pauseActivee = false;
 
     private AfficheurGraphique afficheurGraphique;
 
@@ -93,10 +94,15 @@ public class Afficheur {
     public AfficheurGraphique getAfficheurGraphique() {
         return afficheurGraphique;
     }
-	public void desactiverPause() {
-		afficheurGraphique.desactiverPause();
-	}
 	public void activerPause() {
 		this.afficheurGraphique.activerPause();
+		pauseActivee = true;
 	}
+
+    public void desactiverPauseIfActivee() {
+        if(pauseActivee){
+            afficheurGraphique.desactiverPause();
+            pauseActivee = false;
+        }
+    }
 }
