@@ -17,31 +17,18 @@ public class Utils {
         for (Position pos : cases.keySet()) {
             nodes.get(pos).adjacencies = new ArrayList<>();
             for(Position adj: pos.getAdjacents()){
-                if(estDans(cases, adj) != null){
-                    nodes.get(pos).adjacencies.add(new Edge(nodes.get(estDans2(nodes, adj)), cases.get(estDans(cases, adj))));
+                if(cases.containsKey(adj)){
+                    nodes.get(pos).adjacencies.add(new Edge(nodes.get(adj), cases.get(adj)));
                 }
             }
         }
         //compute paths
-        DijkstraAlgo.computePaths(nodes.get(estDans2(nodes, dep)));
-        List<Node> path = DijkstraAlgo.getShortestPathTo(nodes.get(estDans2(nodes, arr)));
+        DijkstraAlgo.computePaths(nodes.get(dep));
+        List<Node> path = DijkstraAlgo.getShortestPathTo(nodes.get(arr));
         for(Node n : path){
             result.add(node2Position(n));
         }
         return result;
-    }
-
-    private static Position estDans(HashMap<Position, Integer> cases, Position adj) {
-        for(Position pos: cases.keySet())
-            if(pos.equals(adj))
-                return pos;
-        return null;
-    }
-    private static Position estDans2(HashMap<Position, Node> cases, Position adj) {
-        for(Position pos: cases.keySet())
-            if(pos.equals(adj))
-                return pos;
-        return null;
     }
 
     private static Position node2Position(Node n) {

@@ -59,7 +59,7 @@ public class Mobile extends Attaquant{
 
 	@Override
 	public void evoluer(Partie partie) {
-		super.evoluer();
+		super.evoluer(partie);
 		if (!isElimine() && !isSorti()) {
 			if(getPosition().equals(posSortie))
 				sortir(partie);

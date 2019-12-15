@@ -21,12 +21,6 @@ public class Obstacle extends Attaquant{
 	}
 
 	@Override
-	public void evoluer(Partie partie) {
-		super.evoluer();
-		lancerProjectileSiNecessaire(partie);
-	}
-
-	@Override
 	public Obstacle clone(){
 		Obstacle same = new Obstacle(getNom(), getEnergieMax(), getEnergieDispo(), getTactique());
 		for(Projectile p: getProjectiles())
