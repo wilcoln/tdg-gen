@@ -56,6 +56,11 @@ public class TerrainGraphique extends JPanel {
 		this.add(this.reparer);
 		this.add(this.vendre);
 
+		this.acheter.setVisible(false);
+		this.deplacer.setVisible(false);
+		this.vendre.setVisible(false);
+		this.reparer.setVisible(false);
+
 		File img2 = new File(path + "/images/route.jpg");
 		chemin = ImageIO.read(img2);
 
@@ -98,10 +103,10 @@ public class TerrainGraphique extends JPanel {
 		this.positionDeDep = p;
 	}
 	public void activerPause() {
-		this.acheter.setBackground(Color.GREEN);
-		this.deplacer.setBackground(Color.GREEN);
-		this.vendre.setBackground(Color.GREEN);
-		this.reparer.setBackground(Color.GREEN);
+		this.acheter.setVisible(true);
+		this.deplacer.setVisible(true);
+		this.vendre.setVisible(true);
+		this.reparer.setVisible(true);
 
 		this.acheter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
@@ -131,10 +136,10 @@ public class TerrainGraphique extends JPanel {
 		});
 	}
 	public void desactiverPause() {
-		this.acheter.setBackground(Color.white);
-		this.deplacer.setBackground(Color.white);
-		this.vendre.setBackground(Color.white);
-		this.reparer.setBackground(Color.white);
+		this.acheter.setVisible(false);
+		this.deplacer.setVisible(false);
+		this.vendre.setVisible(false);
+		this.reparer.setVisible(false);
 		for (ActionListener l:this.acheter.getActionListeners()) {
 			this.acheter.removeActionListener(l);
 		}

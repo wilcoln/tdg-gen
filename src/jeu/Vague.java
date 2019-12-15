@@ -11,7 +11,7 @@ public class Vague {
     private List<Obstacle> obstacles;
     private List<Mobile> mobiles;
     private boolean attenteInitailisee;
-    private Long debutAttente;
+    private long debutAttente;
     private boolean lancee;
 
     public int getIndiceProchainMobile() {
@@ -35,16 +35,15 @@ public class Vague {
     // P5,P6
     public void deployerMobiles(Partie partie) {
         if(!attenteInitailisee){
-            partie.afficheur.activerPause();
-            debutAttente = System.currentTimeMillis();
+            if(partie.indiceVagueActuelle > 0)
+                partie.afficheur.activerPause();
             attenteInitailisee = true;
             calculCheminDesMobiles(partie);
+            debutAttente = System.currentTimeMillis();
         }else{
-            partie.afficheur.desactiverPauseIfActivee();
-            Long attente = System.currentTimeMillis() - debutAttente;
-            if(partie.indiceVagueActuelle > 0 && attente < partie.getNiveaux().get(partie.indiceNiveauActuel).getDureePause() * 1000){
-                return;
-            }else{
+            long attente = System.currentTimeMillis() - debutAttente;
+            if (attente >= partie.getNiveaux().get(partie.indiceNiveauActuel).getDureePause() * 1000) {
+                partie.afficheur.desactiverPauseIfActivee();
                 lancee = true;
                 if (indiceProchainMobile < mobiles.size()) {
                     if (mobiles.get(indiceProchainMobile).peutEntrer(partie)) {
