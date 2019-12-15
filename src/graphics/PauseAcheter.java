@@ -45,7 +45,7 @@ public class PauseAcheter {
 		bouton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				partie.afficheur.getAfficheurGraphique().getTerrainGraphique().setObstaclePause((Obstacle) obstacles.getSelectedItem());
+				partie.afficheur.getAfficheurGraphique().getTerrainGraphique().setObstaclePause(((Obstacle) obstacles.getSelectedItem()).clone());
 				frame.setVisible(false);
 			}	
 		});

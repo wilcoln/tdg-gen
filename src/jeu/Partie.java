@@ -22,12 +22,14 @@ public class Partie {
     private List<Projectile> projectilesLances;
     private List<Obstacle> obstaclesPlaces;
     private Joueur joueur;
+	private List<Obstacle> obstaclesDispoPourVente;
 
     public Partie() {
         this.niveaux = new ArrayList<>();
         this.vagues = new ArrayList<>();
         this.projectilesLances = new ArrayList<>();
         this.obstaclesPlaces = new ArrayList<>();
+        this.obstaclesDispoPourVente = new ArrayList<>();
     }
 
     public void commencer() throws IOException {
@@ -59,8 +61,15 @@ public class Partie {
         vagues.get(indiceVagueActuelle).deployerMobiles(this);
 
         if (vagues.get(indiceVagueActuelle).echouee(this)) {
+        	afficheur.activerPause();
             System.out.println("Vague terminée!, début prochaine dans 1 seconde");
             joueur.gagneBonusEnergie(vagues.get(indiceVagueActuelle).getEnergieJoueur());
+            try {
+				Thread.sleep(this.niveaux.get(this.indiceNiveauActuel).getDureePause() * 10000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			afficheur.desactiverPause();
             indiceVagueActuelle++;
         }
         if (indiceVagueActuelle == vagues.size()) {
@@ -217,4 +226,8 @@ public class Partie {
         }
         return resultat;
     }
+
+	public List<Obstacle> getObstaclesDispoPourVente() {
+		return this.obstaclesDispoPourVente;
+	}
 }

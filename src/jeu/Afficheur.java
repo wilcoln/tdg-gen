@@ -93,4 +93,10 @@ public class Afficheur {
     public AfficheurGraphique getAfficheurGraphique() {
         return afficheurGraphique;
     }
+	public void desactiverPause() {
+		afficheurGraphique.desactiverPause();
+	}
+	public void activerPause() {
+		this.afficheurGraphique.activerPause();
+	}
 }
