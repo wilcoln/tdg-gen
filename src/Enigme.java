@@ -145,7 +145,7 @@ public class Enigme {
 		ligne3.getCases().add(r.clone());
 		ligne3.getCases().add(r.clone());
 		ligne3.getCases().add(g.clone());
-		ligne3.getCases().add(r.clone());
+		ligne3.getCases().add(s.clone());
 
 		terrain.getLignes().add(ligne1);
 		terrain.getLignes().add(ligne2);

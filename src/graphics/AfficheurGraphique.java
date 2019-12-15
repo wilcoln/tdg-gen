@@ -18,7 +18,7 @@ public class AfficheurGraphique {
 
 	/**
 	 * Create the application.
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public AfficheurGraphique(Partie p) throws IOException {
 		frame = new JFrame("TowerDefense Game");
@@ -36,11 +36,11 @@ public class AfficheurGraphique {
 		frame.setContentPane(terrainGraphique);
 		frame.setVisible(true);
 	}
-	
+
 	public void activerPause() {
 		terrainGraphique.activerPause();
 	}
-	
+
 	public void afficheDialog(String message){
 		JOptionPane.showMessageDialog(null, message);
 	}

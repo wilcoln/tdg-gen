@@ -65,7 +65,7 @@ public class TerrainGraphique extends JPanel {
 		/*
 		 * File img4 = new File(path + "/images/entree.png"); entree =
 		 * ImageIO.read(img4);
-		 * 
+		 *
 		 * File img5 = new File(path + "/images/sortie.png"); sortie =
 		 * ImageIO.read(img5);
 		 */
@@ -102,14 +102,14 @@ public class TerrainGraphique extends JPanel {
 		this.deplacer.setBackground(Color.GREEN);
 		this.vendre.setBackground(Color.GREEN);
 		this.reparer.setBackground(Color.GREEN);
- 
+
 		this.acheter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				PauseAcheter pause = new PauseAcheter(partie);
 				if (obstaclePause==null) {
 					System.out.println("hummm problem ! ");
 				} else {
-				partie.getJoueur().acheterObstacle(obstaclePause);
+					partie.getJoueur().acheterObstacle(obstaclePause);
 				}
 			}
 		});
