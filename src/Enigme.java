@@ -21,7 +21,9 @@ public class Enigme {
 		Projectile p2 = new Projectile("p2", 1, 1, 1, 5);
 		Mobile mb = new Mobile("mb", 1, 20, 1, 1, TactiqueType.attaquePlusProche);
 		Obstacle o = new Obstacle("o", 10, 1, TactiqueType.attaquePlusFaible);
-		partie.getObstaclesDispoPourVente().add(o);
+		Obstacle o2 = new Obstacle("o2", 10, 1, TactiqueType.attaquePlusFaible);
+		partie.getObstaclesDispoPourVente().add(o.clone());
+		partie.getObstaclesDispoPourVente().add(o2.clone());
 		Chemin r = new Chemin("R", "route", 1, 1);
 		Decoration m = new Decoration("M", "montagne");
 		Campement g = new Campement("G", "garage");

@@ -33,7 +33,7 @@ public class PauseAcheter {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 400, 350);
+		frame.setBounds(100, 100, 200, 100);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout());
@@ -41,7 +41,7 @@ public class PauseAcheter {
 		obstacles = new JComboBox(partie.getObstaclesPresents().toArray());
 		panel.add(obstacles);
  
-		JButton bouton = new JButton("Valider");
+		JButton bouton = new JButton("Valider l'achat");
 		bouton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -50,6 +50,7 @@ public class PauseAcheter {
 			}	
 		});
 		panel.add(bouton);
+		frame.setContentPane(panel);
 		frame.setVisible(true);
 	}
 }
