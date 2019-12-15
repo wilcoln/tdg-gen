@@ -72,18 +72,23 @@ public abstract class Attaquant extends Positionable implements Element {
 
 		if(cible != null){
 			for (Projectile p: getProjectiles()) {
-				Projectile pc= p.clone();
-				pc.setDepart(getPosition());
-				pc.setArrive(cible.getPosition());
-				pc.setTypeCible(cible.getType());
-				partie.getProjectilesLances().add(pc);
-				// TODO E24 diminuer energieMaxActuelle ou energieDispo ??? => OK
-				diminuerEnergieMaxActuelle(p.getMasse());
+				if(p.getPortee() >= getPosition().distanceTo(cible.getPosition())){
+					Projectile pc= p.clone();
+					pc.setDepart(getPosition());
+					pc.setArrive(cible.getPosition());
+					pc.setTypeCible(cible.getType());
+					partie.getProjectilesLances().add(pc);
+					// TODO E24 diminuer energieMaxActuelle ou energieDispo ??? => OK
+					diminuerEnergieMaxActuelle(p.getMasse());
+				}
 			}
 		}
 	}
-	public void evoluer(){
-		this.energieDispo = this.energieMaxActuelle; // Activation
+	public void evoluer(Partie partie){
+		if(!isElimine()){
+			this.energieDispo = this.energieMaxActuelle; // Activation
+			lancerProjectileSiNecessaire(partie);
+		}
 	}
 	public int getEnergieMaxActuelle() {
 		return energieMaxActuelle;
@@ -97,28 +102,28 @@ public abstract class Attaquant extends Positionable implements Element {
 
 	public Attaquant getEnemiPrio(List<Attaquant> enemisPresents){
 		if (enemisPresents.size() > 0) {
-			Attaquant enemiPrio = enemisPresents.get(0);
+			Attaquant enemiPrio = null;
 			switch (getTactique()){
 				case attaquePlusFaible:
-					int energieMaxMin = enemiPrio.getEnergieMax();
+					int energieMaxMin = Integer.MAX_VALUE;
 					for(Attaquant enemi: enemisPresents)
-						if(enemi.getEnergieMax() < energieMaxMin){
+						if(enemi.getEnergieMax() < energieMaxMin && getPosition().surMemeAxe(enemi.getPosition())){
 							energieMaxMin = enemi.getEnergieMax();
 							enemiPrio = enemi;
 						}
 					break;
 				case attaquePlusFort:
-					int energieMaxMax = enemiPrio.getEnergieMax();
+					int energieMaxMax = 0;
 					for(Attaquant enemi: enemisPresents)
-						if(enemi.getEnergieMax() > energieMaxMax){
+						if(enemi.getEnergieMax() > energieMaxMax && getPosition().surMemeAxe(enemi.getPosition())){
 							energieMaxMax = enemi.getEnergieMax();
 							enemiPrio = enemi;
 						}
 					break;
 				case attaquePlusProche:
-					double distanceMin = enemiPrio.getEnergieMax();
+					double distanceMin = Integer.MAX_VALUE;
 					for(Attaquant enemi: enemisPresents)
-						if(enemi.getPosition().distanceTo(getPosition()) < distanceMin){
+						if(enemi.getPosition().distanceTo(getPosition()) < distanceMin && getPosition().surMemeAxe(enemi.getPosition())){
 							distanceMin = enemi.getPosition().distanceTo(getPosition());
 							enemiPrio = enemi;
 						}

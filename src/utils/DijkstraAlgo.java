@@ -56,96 +56,6 @@ public class DijkstraAlgo{
         return path;
     }
 
-
-
-    public static void main(String[] args){
-
-        //initialize the graph base on the Romania map
-        HashMap<String, Node> nodes = new HashMap<>();
-        nodes.put("1,1", new Node("1,1"));
-        nodes.put("1,2", new Node("1,2"));
-
-        nodes.put("2,1", new Node("2,1"));
-        nodes.put("2,2", new Node("2,2"));
-        nodes.put("2,3", new Node("2,3"));
-        nodes.put("2,4", new Node("2,4"));
-        nodes.put("2,5", new Node("2,5"));
-        nodes.put("3,1", new Node("3,1"));
-        nodes.put("3,2", new Node("3,2"));
-        nodes.put("3,3", new Node("3,3"));
-        nodes.put("3,4", new Node("3,4"));
-        nodes.put("3,5", new Node("3,5"));
-
-        /*//initialize the edges
-        nodes.get("1,1").adjacencies = new Edge[]{
-                new Edge(nodes.get("1,2"),1),
-                new Edge(nodes.get("2,1"),0),
-        };
-
-        nodes.get("1,2").adjacencies = new Edge[]{
-                new Edge(nodes.get("1,1"),1),
-        };
-
-        nodes.get("2,1").adjacencies = new Edge[]{
-                new Edge(nodes.get("1,1"),0),
-                new Edge(nodes.get("3,1"),1)
-        };
-
-        nodes.get("3,1").adjacencies = new Edge[]{
-                new Edge(nodes.get("2,1"),0),
-                new Edge(nodes.get("3,2"),1)
-        };
-
-        nodes.get("3,2").adjacencies = new Edge[]{
-                new Edge(nodes.get("3,1"),1),
-                new Edge(nodes.get("3,3"),1),
-        };
-
-        nodes.get("2,3").adjacencies = new Edge[]{
-                new Edge(nodes.get("2,4"),1),
-                new Edge(nodes.get("3,3"),1)
-        };
-
-        nodes.get("3,3").adjacencies = new Edge[]{
-                new Edge(nodes.get("3,2"),1),
-                new Edge(nodes.get("2,3"),1)
-        };
-
-        nodes.get("2,4").adjacencies = new Edge[]{
-                new Edge(nodes.get("2,3"),1),
-                new Edge(nodes.get("2,5"),0)
-        };
-
-        nodes.get("2,5").adjacencies = new Edge[]{
-                new Edge(nodes.get("2,4"),1),
-                new Edge(nodes.get("3,5"),0)
-        };
-
-        nodes.get("3,5").adjacencies = new Edge[]{
-                new Edge(nodes.get("2,5"),0)
-        };
-
-        //compute paths
-        computePaths(nodes.get("1,1"));
-        List<Node> path = getShortestPathTo(nodes.get("3,5"));
-        System.out.println("Path n11 à n35 : " + path);
-
-        reInit(nodes.values());
-        //compute paths
-        computePaths(nodes.get("2,1"));
-        path = getShortestPathTo(nodes.get("3,5"));
-        System.out.println("Path n21 à n35 : " + path);*/
-
-    }
-
-    private static void reInit(Collection<Node> nodes) {
-        for (Node n: nodes) {
-            n.shortestDistance = Double.POSITIVE_INFINITY;
-            n.parent = null;
-        }
-    }
-
-
 }
 
 
@@ -173,9 +83,9 @@ class Node implements Comparable<Node>{
 
 //define Edge
 class Edge{
-    public final Node target;
-    public final double weight;
-    public Edge(Node targetNode, double weightVal){
+    final Node target;
+    final double weight;
+    Edge(Node targetNode, double weightVal){
         target = targetNode;
         weight = weightVal;
     }

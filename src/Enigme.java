@@ -13,9 +13,10 @@ public class Enigme {
 		// Définition du jeu
 		Jeu jeu = new Jeu("Enigme");
 		// Définition des élements du  jeu
-		Projectile p = new Projectile("p", 1, 1, 1, 5);
+		Projectile p1 = new Projectile("p1", 1, 1, 1, 5);
+		Projectile p2 = new Projectile("p2", 1, 1, 1, 5);
 		Mobile mb = new Mobile("mb", 1, 20, 1, 1, TactiqueType.attaquePlusProche);
-		Obstacle o = new Obstacle("o", 10, 1, TactiqueType.attaquePlusFaible);
+		Obstacle o = new Obstacle("o", 20, 1, TactiqueType.attaquePlusFaible);
 		Chemin r = new Chemin("R", "route", 1, 1);
 		Decoration m = new Decoration("M", "montagne");
 		Campement g = new Campement("G", "garage");
@@ -23,9 +24,11 @@ public class Enigme {
 		Sortie s = new Sortie("S", "sortie");
 
 		//Affectation des projectiles aux attaquants
-		o.getProjectiles().add(p.clone());
+		o.getProjectiles().add(p1.clone());
+		mb.getProjectiles().add(p2.clone());
 		// Ajout des élements dans la liste des élts du jeu
-		jeu.getElements().add(p.clone());
+		jeu.getElements().add(p1.clone());
+		jeu.getElements().add(p2.clone());
 		jeu.getElements().add(mb.clone());
 		jeu.getElements().add(o.clone());
 		jeu.getElements().add(r.clone());
@@ -100,12 +103,12 @@ public class Enigme {
 		mv6.setPosSortie(new Position(2, 5));
 
 		Mobile mv7 = mb.clone();
-		mv7.setNom("mb6");
+		mv7.setNom("mb7");
 		mv7.setPosEntree(new Position(2, 1));
 		mv7.setPosSortie(new Position(2, 5));
 
 		Mobile mv8 = mb.clone();
-		mv8.setNom("mb6");
+		mv8.setNom("mb8");
 		mv8.setPosEntree(new Position(1, 1));
 		mv8.setPosSortie(new Position(2, 5));
 

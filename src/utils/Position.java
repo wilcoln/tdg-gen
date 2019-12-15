@@ -62,8 +62,8 @@ public class Position {
 		return "[ " + getX() + ", " + getY() + " ]";
 	}
 
-	public boolean equals(Position that) {
-		return that != null && this.getX() == that.getX() && this.getY() == that.getY();
+	public boolean equals(Object that) {
+		return (that instanceof  Position) && this.getX() == ((Position)that).getX() && this.getY() == ((Position)that).getY();
 	}
 
 	public boolean isUndefined() {
@@ -97,5 +97,9 @@ public class Position {
 	@Override
 	public int hashCode(){
 		return 63 * x + y;
+	}
+
+	public boolean surMemeAxe(Position that) {
+		return that != null && (this.x == that.x || this.y == that.y);
 	}
 }
