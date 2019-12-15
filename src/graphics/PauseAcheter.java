@@ -38,7 +38,8 @@ public class PauseAcheter {
 		JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout());
 		
-		obstacles = new JComboBox(partie.getObstaclesPresents().toArray());
+		obstacles = new JComboBox(partie.getObstaclesDispoPourVente().toArray());
+		System.out.println(obstacles.getSize());
 		panel.add(obstacles);
  
 		JButton bouton = new JButton("Valider l'achat");

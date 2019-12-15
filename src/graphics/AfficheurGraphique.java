@@ -50,7 +50,6 @@ public class AfficheurGraphique {
 	}
 
 	public TerrainGraphique getTerrainGraphique() {
-		// TODO Auto-generated method stub
 		return this.terrainGraphique;
 	}
 
