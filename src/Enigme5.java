@@ -22,7 +22,7 @@ public class Enigme5 {
 		Projectile P = new Projectile("P",1,1,1,1);
 		jeu.getElements().add(P.clone());
 
-		Mobile MB = new Mobile("MB",1,1,1,1,TactiqueType.attaquePlusFaible);
+		Mobile MB = new Mobile("MB",1,20,1,1,TactiqueType.attaquePlusFaible);
 		jeu.getElements().add(MB.clone());
 
 		Sortie sortie = new Sortie("S","sortie"); 
@@ -81,50 +81,50 @@ public class Enigme5 {
 		Vague v1  = new Vague(3);
 		Mobile mv1 = MB.clone();
 		mv1.setNom("mv1");
-		mv1.setPosEntree(new Position(2, 1));
-		mv1.setPosSortie(new Position(7, 1));
+		mv1.setPosEntree(new Position(1, 1));
+		mv1.setPosSortie(new Position(2, 7));
 		// Ajout des éléments dans la vague
 		v1.getMobiles().add(mv1);
 		Mobile mv2 = MB.clone();
 		mv2.setNom("mv2");
-		mv2.setPosEntree(new Position(2, 1));
-		mv2.setPosSortie(new Position(7, 1));
+		mv2.setPosEntree(new Position(1, 1));
+		mv2.setPosSortie(new Position(2, 7));
 		// Ajout des éléments dans la vague
 		v1.getMobiles().add(mv2);
 		Mobile mv3 = MB.clone();
 		mv3.setNom("mv3");
-		mv3.setPosEntree(new Position(2, 1));
-		mv3.setPosSortie(new Position(7, 1));
+		mv3.setPosEntree(new Position(1, 1));
+		mv3.setPosSortie(new Position(2, 7));
 		// Ajout des éléments dans la vague
 		v1.getMobiles().add(mv3);
 		Mobile mv4 = MB.clone();
 		mv4.setNom("mv4");
-		mv4.setPosEntree(new Position(2, 1));
-		mv4.setPosSortie(new Position(7, 1));
+		mv4.setPosEntree(new Position(1, 1));
+		mv4.setPosSortie(new Position(2, 7));
 		// Ajout des éléments dans la vague
 		v1.getMobiles().add(mv4);
 		Mobile mv5 = MB.clone();
 		mv5.setNom("mv5");
-		mv5.setPosEntree(new Position(2, 1));
-		mv5.setPosSortie(new Position(7, 1));
+		mv5.setPosEntree(new Position(1, 1));
+		mv5.setPosSortie(new Position(2, 7));
 		// Ajout des éléments dans la vague
 		v1.getMobiles().add(mv5);
 		Mobile mv6 = MB.clone();
 		mv6.setNom("mv6");
-		mv6.setPosEntree(new Position(2, 1));
-		mv6.setPosSortie(new Position(7, 1));
+		mv6.setPosEntree(new Position(1, 1));
+		mv6.setPosSortie(new Position(2, 7));
 		// Ajout des éléments dans la vague
 		v1.getMobiles().add(mv6);
 		Mobile mv7 = MB.clone();
 		mv7.setNom("mv7");
-		mv7.setPosEntree(new Position(2, 1));
-		mv7.setPosSortie(new Position(7, 1));
+		mv7.setPosEntree(new Position(1, 1));
+		mv7.setPosSortie(new Position(2, 7));
 		// Ajout des éléments dans la vague
 		v1.getMobiles().add(mv7);
 		Mobile mv8 = MB.clone();
 		mv8.setNom("mv8");
-		mv8.setPosEntree(new Position(2, 1));
-		mv8.setPosSortie(new Position(7, 1));
+		mv8.setPosEntree(new Position(1, 1));
+		mv8.setPosSortie(new Position(2, 7));
 		// Ajout des éléments dans la vague
 		v1.getMobiles().add(mv8);
 
