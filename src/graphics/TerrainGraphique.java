@@ -81,13 +81,6 @@ public class TerrainGraphique extends JPanel {
 		File img3 = new File(path + "/images/montagne.png");
 		decoration = ImageIO.read(img3);
 
-		/*
-		 * File img4 = new File(path + "/images/entree.png"); entree =
-		 * ImageIO.read(img4);
-		 *
-		 * File img5 = new File(path + "/images/sortie.png"); sortie =
-		 * ImageIO.read(img5);
-		 */
 		File img4 = new File(path + "/images/route.jpg");
 		entree = ImageIO.read(img4);
 
