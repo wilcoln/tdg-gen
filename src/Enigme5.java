@@ -163,7 +163,7 @@ public class Enigme5 {
 		l2.getCases().add(montagne3.clone());
 		l2.getCases().add(route2.clone());
 		l2.getCases().add(route6.clone());
-		l2.getCases().add(route3.clone());
+		l2.getCases().add(sortie.clone());
 		terrain1.getLignes().add(l2);
 
 		Ligne l3 = new Ligne();
@@ -221,3 +221,4 @@ public class Enigme5 {
 		partie.commencer();
 	}
 }
+
