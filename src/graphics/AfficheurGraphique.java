@@ -46,7 +46,7 @@ public class AfficheurGraphique {
 		frameTerrain.setVisible(true);
 	}
 
-	public void activerPause() {
+	public void afficherMenuPause() {
 		terrainGraphique.activerPause();
 	}
 
@@ -62,7 +62,7 @@ public class AfficheurGraphique {
 		return this.terrainGraphique;
 	}
 
-	public void desactiverPause() {
+	public void cacherMenuPause() {
 		this.terrainGraphique.desactiverPause();
 	}
 }

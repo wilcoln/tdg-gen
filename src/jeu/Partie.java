@@ -41,8 +41,7 @@ public class Partie {
             notifications.add("Tour de jeu n°" + (++nbTour) + "\n================");
             evoluer();
             afficheur.afficherTerrain();
-            afficheur.afficherNotifs(this);
-            notifications.clear();
+            afficheur.afficherNotifs();
             Timer.attendre(Config.STEP_INTERVAL);
         }
 
@@ -61,11 +60,11 @@ public class Partie {
             o.evoluer(this);
         }
 
-        vagues.get(indiceVagueActuelle).deployerMobiles(this);
+        getVagueActuelle().deployerMobiles(this);
 
-        if (vagues.get(indiceVagueActuelle).echouee(this)) {
+        if (getVagueActuelle().echouee(this)) {
             notifications.add("Vague terminée!");
-            joueur.gagneBonusEnergie(vagues.get(indiceVagueActuelle).getEnergieJoueur());
+            joueur.gagneBonusEnergie(getVagueActuelle().getEnergieJoueur());
             indiceVagueActuelle++;
         }
         if (indiceVagueActuelle == vagues.size()) {
@@ -77,7 +76,7 @@ public class Partie {
         }
         notifications.add(getJaugeEnergieJoueur());
         notifications.add("nb mobiles sortis : " + nbMobilesSortis + " (tolerance = " + getToleranceActuelle() + ")");
-        if(indiceVagueActuelle < vagues.size() && !vagues.get(indiceVagueActuelle).isLancee()){
+        if(indiceVagueActuelle < vagues.size() && !getVagueActuelle().isLancee()){
             notifications.clear();
             notifications.add("...\r");
         }
@@ -116,7 +115,7 @@ public class Partie {
     public List<Attaquant> getMobilesPresents() {
         List<Attaquant> resultats = new ArrayList<>();
         if (!isOver()) {
-            Vague vagueActuel = vagues.get(indiceVagueActuelle);
+            Vague vagueActuel = getVagueActuelle();
             for (Mobile m : vagueActuel.getMobiles()) {
                 if (!m.isSorti() && !m.isElimine() && terrain.contientPosition(m.getPosition()))
                     resultats.add(m);
@@ -128,8 +127,8 @@ public class Partie {
     public List<Attaquant> getObstaclesPresents() {
         List<Attaquant> resultats = new ArrayList<>();
         if (!isOver()) {
-            if (vagues.get(indiceVagueActuelle).isLancee()) {
-                for (Obstacle obstacle : vagues.get(indiceVagueActuelle).getObstacles()) {
+            if (getVagueActuelle().isLancee()) {
+                for (Obstacle obstacle : getVagueActuelle().getObstacles()) {
                     if (!obstacle.isElimine()) {
                         resultats.add(obstacle);
                     }
@@ -143,6 +142,12 @@ public class Partie {
             }
         }
         return resultats;
+    }
+
+    private Vague getVagueActuelle() {
+        if(indiceVagueActuelle < vagues.size())
+            return vagues.get(indiceVagueActuelle);
+        return null;
     }
 
     public List<Projectile> getProjectilesPresents() {
@@ -225,8 +230,16 @@ public class Partie {
         return obstacles;
     }
 
+    public void donneBonusEnergieJoueur(int bonusEnergie) {
+        getJoueur().gagneBonusEnergie(bonusEnergie);
+    }
+
     public List<Projectile> getProjectilesLances() {
         return projectilesLances;
+    }
+
+    public void addNotification(String notif) {
+        notifications.add(notif);
     }
 
     public int getVolumeOccupeAt(Position pos) {

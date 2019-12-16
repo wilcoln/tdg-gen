@@ -39,16 +39,16 @@ public class Vague {
     public void deployerMobiles(Partie partie) {
         if(!attenteInitailisee){
             if(partie.indiceVagueActuelle > 0)
-				partie.getNotifications().add("Nouvelle vague dans 1 seconde....");
-                partie.afficheur.activerPause();
+				partie.addNotification("Nouvelle vague dans 1 seconde....");
+                partie.afficheur.afficherMenuPause();
             attenteInitailisee = true;
             calculCheminDesMobiles(partie);
             debutAttente = System.currentTimeMillis();
-			partie.getNotifications().add("Infos Vague:\n" + getInfos());
+			partie.addNotification("Infos Vague:\n" + getInfos());
         }else{
             long attente = System.currentTimeMillis() - debutAttente;
             if (partie.indiceVagueActuelle == 0 || attente >= partie.getNiveaux().get(partie.indiceNiveauActuel).getDureePause() * 1000) {
-                partie.afficheur.desactiverPauseIfActivee();
+                partie.afficheur.cacherMenuPauseSiAffiche();
                 lancee = true;
                 if (indiceProchainMobile < mobiles.size()) {
                     if (mobiles.get(indiceProchainMobile).peutEntrer(partie)) {

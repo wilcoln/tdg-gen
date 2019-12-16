@@ -1,7 +1,6 @@
 package element.actif;
 
 import jeu.Partie;
-import utils.Position;
 
 public class Obstacle extends Attaquant{
 
@@ -39,7 +38,7 @@ public class Obstacle extends Attaquant{
 		super.evoluer(partie);
 		if(isElimine()){
 			partie.getJoueur().getObstacles().remove(this);
-			partie.getNotifications().add("un obstacle " + getNom() + " éliminé");
+			partie.addNotification("un obstacle " + getNom() + " éliminé");
 		}
 	}
 	@Override

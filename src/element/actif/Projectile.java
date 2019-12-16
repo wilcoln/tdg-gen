@@ -111,12 +111,12 @@ public class Projectile extends Positionable implements Element {
 
 	@Override
 	public String getEtat() {
-		/*
-		 * return "Projectile \n nom : " + name + "\n" + "Est Vivant :" + !elimine +
-		 * "energie :" + energie + "masse : " + masse + "vitesse : " + vitesse +
-		 * "portee : " + portee;
-		 */
-		return getNom();
+		 return "Projectile \n" +
+				"\tnom : " + getNom() + "\n" +
+		 		"\tenergie :" + energie + "\n" +
+				"\tmasse : " + masse + "\n" +
+				"\tvitesse : " + vitesse + "\n" +
+		 		"\tportee : " + portee;
 	}
 
 	@Override
@@ -135,7 +135,7 @@ public class Projectile extends Positionable implements Element {
 				Attaquant victime = victimesPossibles.get(0);
 				croiserAttaquant(victime);
 				if(victime.isElimine() && (victime instanceof Mobile)){
-					partie.getJoueur().gagneBonusEnergie(victime.getEnergieMax());
+					partie.donneBonusEnergieJoueur(victime.getEnergieMax());
 				}
 			}
 			if (getPosition().distanceTo(depart) < portee)
