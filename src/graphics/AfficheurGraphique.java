@@ -15,6 +15,7 @@ public class AfficheurGraphique {
 	private JFrame frameNotif;
 	private TerrainGraphique terrainGraphique;
 	private JTextArea notif;
+	private JScrollPane sp = new JScrollPane();
 	private static Partie partie;
 	
 	/**
@@ -49,7 +50,7 @@ public class AfficheurGraphique {
 		frameTerrain.setVisible(true);
 	}
 	public void afficherNotif() {
-		JScrollPane sp = new JScrollPane();
+		notif.setText("xxzcz");
 		sp.setViewportView(notif);
 		frameNotif.setContentPane(sp);
 		frameNotif.setVisible(true);
