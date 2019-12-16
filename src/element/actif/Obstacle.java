@@ -31,6 +31,16 @@ public class Obstacle extends Attaquant{
 		return same;
 	}
 
+	public int coutReparation(){
+		return getEnergieMax() - getEnergieMaxActuelle();
+	}
+
+	@Override
+	public void evoluer(Partie partie){
+		super.evoluer(partie);
+		if(isElimine())
+			partie.getJoueur().getObstacles().remove(this);
+	}
 	@Override
 	public String getEtat() {
 		return "Obstacle \n" + super.getEtat();

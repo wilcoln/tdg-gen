@@ -20,7 +20,6 @@ public class Partie {
     private List<Vague> vagues; // P14
     private int nbMobilesSortis;
     private List<Projectile> projectilesLances;
-    private List<Obstacle> obstaclesPlaces;
     private Joueur joueur;
 	private List<Obstacle> obstaclesDispoPourVente;
 
@@ -28,7 +27,6 @@ public class Partie {
         this.niveaux = new ArrayList<>();
         this.vagues = new ArrayList<>();
         this.projectilesLances = new ArrayList<>();
-        this.obstaclesPlaces = new ArrayList<>();
         this.obstaclesDispoPourVente = new ArrayList<>();
     }
 
@@ -119,8 +117,8 @@ public class Partie {
                 }
             }
 
-            for (Obstacle obstacle : obstaclesPlaces) {
-                if (!obstacle.isElimine()) {
+            for (Obstacle obstacle : joueur.getObstacles()) {
+                if (terrain.contientPosition(obstacle.getPosition())) {
                     resultats.add(obstacle);
                 }
             }
@@ -222,10 +220,5 @@ public class Partie {
 
 	public List<Obstacle> getObstaclesDispoPourVente() {
 		return this.obstaclesDispoPourVente;
-	}
-
-	public List<Obstacle> getObstaclesPlaces() {
-		// TODO Auto-generated method stub
-		return this.obstaclesPlaces;
 	}
 }

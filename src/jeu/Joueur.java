@@ -4,46 +4,48 @@ import javax.swing.JOptionPane;
 
 import config.Config;
 import element.actif.Obstacle;
-import element.passif.Campement;
 import utils.Position;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Joueur {
 	private int energie;
 	private Partie partie;
 
+	private List<Obstacle> obstacles;
+
 	public Joueur(Partie partie) {
 		this.partie = partie;
 		this.energie = partie.getNiveaux().get(0).getEnergieInitiale();
+		this.obstacles = new ArrayList<>();
 	}
 	// TODO P15--P17
 
 	// TODO P15--P17
 	public void acheterObstacle(Obstacle obstacle) {
-		if (partie.getJoueur().energie >= obstacle.getEnergieDispo()) {
-			partie.getObstaclesPlaces().add(obstacle);
-			partie.getJoueur().energie -= obstacle.getEnergieDispo();
-			System.out.println("<++++> un obstacle acheté : "+obstacle.getNom());
+		if (energie >= obstacle.getEnergieDispo()) {
+			obstacles.add(obstacle);
+			energie -= obstacle.getEnergieDispo();
+			//System.out.println("<++++> un obstacle acheté : "+obstacle.getNom());
 		} else {
+			//TODO show notifications plutôt
 			JOptionPane.showMessageDialog(null, "L'energie du joueur n'est pas suffisante pour effectuer cet achat");
 		}
 	}
 
 	// TODO P15--P17
 	public void vendreObstacle(Obstacle obstacle) {
-		if (partie.getVagues().get(partie.indiceVagueActuelle).getObstacles().contains(obstacle)) {
-			partie.getObstaclesPlaces().remove(obstacle);
-			partie.getJoueur().energie += obstacle.getEnergieDispo();
-			System.out.println("<----> un obstacle vendu : "+obstacle.getNom());
-		} else {
-			JOptionPane.showMessageDialog(null, "Le joueur ne dispose plus de cet article");
-		}
+			obstacles.remove(obstacle);
+			energie += obstacle.getEnergieDispo();
+			// System.out.println("<----> un obstacle vendu : "+obstacle.getNom());
 	}
 
 	// TODO P9
 	public void reparerObstacle(Obstacle obstacle) {
-		if (partie.getJoueur().energie >= Config.PRIX_REPARATION) {
-			obstacle.augmenterEnergieMaxActuelle(Config.PRIX_REPARATION);
-			partie.getJoueur().energie -= Config.PRIX_REPARATION;
+		if (energie >= obstacle.coutReparation()) {
+			obstacle.reparer();
+			energie -= obstacle.coutReparation();
 		} else {
 			JOptionPane.showMessageDialog(null,
 					"L'energie du joueur n'est pas suffisante pour effectuer cet reparation");
@@ -52,16 +54,17 @@ public class Joueur {
 	// TODO P15--P17
 
 	public void deplacerObstacle(Obstacle obstacle, Position p) {
-		if (partie.getJoueur().energie >= Config.PRIX_DEPLACEMENT) {
+		if (energie >= obstacle.coutReparation()) {
 				obstacle.setPosition(p);
-				partie.getJoueur().energie -= Config.PRIX_DEPLACEMENT;
-			if (!partie.getObstaclesPlaces().contains(obstacle)) {
-				partie.getObstaclesPlaces().add(obstacle);
-			} 
+				partie.getJoueur().energie -= obstacle.coutReparation();
 		} else {
 			JOptionPane.showMessageDialog(null,
 					"L'energie du joueur n'est pas suffisante pour effectuer ce deplacement");
 		}
+	}
+
+	public List<Obstacle> getObstacles() {
+		return obstacles;
 	}
 
 	public void gagneBonusEnergie(int bonusEnergie) {

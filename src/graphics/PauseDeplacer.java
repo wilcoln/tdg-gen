@@ -1,7 +1,5 @@
 package graphics;
 
-import java.awt.EventQueue;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,9 +16,8 @@ import utils.Position;
 public class PauseDeplacer {
 
 	private JFrame frame;
-	private JComboBox<Obstacle> obstaclesPlaces;
-	private JComboBox<Obstacle> obstaclesPresents;
-	private JComboBox<Position> positions;
+	private JComboBox<Obstacle> obstaclesCb;
+	private JComboBox<Position> positionsCb;
 	private Partie partie;
 
 	/**
@@ -40,27 +37,24 @@ public class PauseDeplacer {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel panel = new JPanel();
 
-		obstaclesPlaces = new JComboBox(partie.getObstaclesPlaces().toArray());
-		panel.add(obstaclesPlaces);
+		obstaclesCb = new JComboBox(partie.getJoueur().getObstacles().toArray());
+		panel.add(obstaclesCb);
 
-		obstaclesPresents = new JComboBox(partie.getObstaclesPresents().toArray());
-		panel.add(obstaclesPresents);
-
-		positions = new JComboBox();
+		positionsCb = new JComboBox();
 		for (int i = 0; i < partie.getTerrain().getLargeur(); i++) {
 			for (int j = 0; j < partie.getTerrain().getLongueur(); j++) {
 				if (partie.getTerrain().getNatureTerrainAtIndices(i, j) instanceof Campement) {
-					positions.addItem(new Position(i, j));
+					positionsCb.addItem(new Position(i+1, j+1));
 				}
 			}
 		}
-		panel.add(positions);
+		panel.add(positionsCb);
 		JButton bouton = new JButton("Deplacer");
 		bouton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				partie.getJoueur().deplacerObstacle(((Obstacle) obstaclesPresents.getSelectedItem()).clone(),
-						((Position) positions.getSelectedItem()));
+				partie.getJoueur().deplacerObstacle(((Obstacle) obstaclesCb.getSelectedItem()),
+						((Position) positionsCb.getSelectedItem()));
 				frame.setVisible(false);
 			}
 		});
