@@ -44,7 +44,6 @@ public class TerrainGraphique extends JPanel {
 	private Image obstacle;
 	private Image mobile;
 	private Image projectile;
-	private Obstacle obstaclePause;
 	private JButton deplacer = new JButton("Deplacer");
 	private JButton vendre = new JButton("Vendre");
 	private JButton reparer = new JButton("Reparer");
@@ -55,15 +54,13 @@ public class TerrainGraphique extends JPanel {
 
 	public TerrainGraphique(Partie partie) throws IOException {
 
+		this.setLayout(new GridBagLayout());
 		this.add(this.acheter);
 		this.add(this.deplacer);
 		this.add(this.reparer);
 		this.add(this.vendre);
-		this.setLayout(new GridBagLayout());
 		JTextArea notif = new JTextArea("=====> Notification <===== \n");
 		notif.setBackground(Color.white);
-		notif.setBounds(0, partie.getTerrain().getLongueur() * 100, partie.getTerrain().getLongueur() * 100 / 2,
-				partie.getTerrain().getLongueur() * 108 + 130);
 		notif.setEditable(false);
 		JScrollPane actionScroll = new JScrollPane(notif, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -101,14 +98,6 @@ public class TerrainGraphique extends JPanel {
 
 		this.partie = partie;
 		this.terrain = partie.getTerrain();
-	}
-
-	public void setObstaclePause(Obstacle o) {
-		this.obstaclePause = o;
-	}
-
-	public void setPositonDeplacement(Position p) {
-		this.positionDeDep = p;
 	}
 
 	public void activerPause() {

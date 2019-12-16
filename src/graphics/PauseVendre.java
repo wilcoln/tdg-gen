@@ -1,7 +1,5 @@
 package graphics;
 
-import java.awt.EventQueue;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,13 +9,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import element.actif.Obstacle;
-import graphics.TerrainGraphique;
 import jeu.Partie;
 
 public class PauseVendre{
 
 	private JFrame frame;
-	private JComboBox obstacles;
+	private JComboBox obstaclesCb;
 	private Partie partie;
 
 	/**
@@ -37,14 +34,14 @@ public class PauseVendre{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel panel = new JPanel();
 
-		obstacles = new JComboBox(partie.getObstaclesPresents().toArray());
-		panel.add(obstacles);
+		obstaclesCb = new JComboBox(partie.getJoueur().getObstacles().toArray());
+		panel.add(obstaclesCb);
 
 		JButton bouton = new JButton("Valider");
 		bouton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				partie.getJoueur().vendreObstacle(((Obstacle) obstacles.getSelectedItem()).clone());
+				partie.getJoueur().vendreObstacle(((Obstacle) obstaclesCb.getSelectedItem()));
 				frame.setVisible(false);
 			}
 		});

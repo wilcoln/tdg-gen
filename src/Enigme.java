@@ -47,6 +47,7 @@ public class Enigme {
 
 		// Définition du niveau
 		Niveau niveau = new Niveau("Unique Level", 10, 0, 4);
+
 		// Ajout du niveau à la partie
 		partie.getNiveaux().add(niveau);
 
