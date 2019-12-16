@@ -64,16 +64,16 @@ public class TerrainGraphique extends JPanel {
 		this.vendre.setVisible(false);
 		this.reparer.setVisible(false);
 
-		File img2 = new File(path + "/images/route.jpg");
+		File img2 = new File(path + "/images/sable.png");
 		chemin = ImageIO.read(img2);
 
 		File img3 = new File(path + "/images/montagne.png");
 		decoration = ImageIO.read(img3);
 
-		File img4 = new File(path + "/images/route.jpg");
+		File img4 = new File(path + "/images/sable.png");
 		entree = ImageIO.read(img4);
 
-		File img5 = new File(path + "/images/route.jpg");
+		File img5 = new File(path + "/images/sable.png");
 		sortie = ImageIO.read(img5);
 
 		File img6 = new File(path + "/images/garage.png");
