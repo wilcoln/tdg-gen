@@ -77,7 +77,7 @@ public class Partie {
         }
         notifications.add(getJaugeEnergieJoueur());
         notifications.add("nb mobiles sortis : " + nbMobilesSortis + " (tolerance = " + getToleranceActuelle() + ")");
-        if(!vagues.get(indiceVagueActuelle).isLancee()){
+        if(indiceVagueActuelle < vagues.size() && !vagues.get(indiceVagueActuelle).isLancee()){
             notifications.clear();
             notifications.add("...\r");
         }
