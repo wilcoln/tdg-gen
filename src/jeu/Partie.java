@@ -223,4 +223,9 @@ public class Partie {
 	public List<Obstacle> getObstaclesDispoPourVente() {
 		return this.obstaclesDispoPourVente;
 	}
+
+	public List<Obstacle> getObstaclesPlaces() {
+		// TODO Auto-generated method stub
+		return this.obstaclesPlaces;
+	}
 }

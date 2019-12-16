@@ -19,6 +19,7 @@ public class PauseDeplacer {
 
 	private JFrame frame;
 	private JComboBox<Obstacle> obstaclesPlaces;
+	private JComboBox<Obstacle> obstaclesPresents;
 	private JComboBox<Position> positions;
 	private Partie partie;
 
@@ -38,10 +39,12 @@ public class PauseDeplacer {
 		frame.setBounds(100, 100, 200, 100);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel panel = new JPanel();
-		panel.setLayout(new FlowLayout());
 
-		obstaclesPlaces = new JComboBox(partie.getObstaclesPresents().toArray());
+		obstaclesPlaces = new JComboBox(partie.getObstaclesPlaces().toArray());
 		panel.add(obstaclesPlaces);
+
+		obstaclesPresents = new JComboBox(partie.getObstaclesPresents().toArray());
+		panel.add(obstaclesPresents);
 
 		positions = new JComboBox();
 		for (int i = 0; i < partie.getTerrain().getLargeur(); i++) {
@@ -52,14 +55,12 @@ public class PauseDeplacer {
 			}
 		}
 		panel.add(positions);
-		JButton bouton = new JButton("Valider");
+		JButton bouton = new JButton("Deplacer");
 		bouton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				partie.afficheur.getAfficheurGraphique().getTerrainGraphique()
-						.setPositonDeplacement((Position) positions.getSelectedItem());
-				partie.afficheur.getAfficheurGraphique().getTerrainGraphique()
-						.setObstaclePause((Obstacle) obstaclesPlaces.getSelectedItem());
+				partie.getJoueur().deplacerObstacle(((Obstacle) obstaclesPresents.getSelectedItem()).clone(),
+						((Position) positions.getSelectedItem()));
 				frame.setVisible(false);
 			}
 		});

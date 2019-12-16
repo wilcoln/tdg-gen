@@ -23,7 +23,7 @@ public class AfficheurGraphique {
 	public AfficheurGraphique(Partie p) throws IOException {
 		frame = new JFrame("TowerDefense Game");
 		partie = p;
-		frame.setBounds(0, 0, partie.getTerrain().getLongueur()*100,partie.getTerrain().getLargeur()*108);
+		frame.setBounds(0, 0, partie.getTerrain().getLongueur()*100,partie.getTerrain().getLargeur()*108+130);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		terrainGraphique = new TerrainGraphique(p);
 	}

@@ -26,6 +26,9 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import utils.Position;
 
@@ -55,7 +58,16 @@ public class TerrainGraphique extends JPanel {
 		this.add(this.deplacer);
 		this.add(this.reparer);
 		this.add(this.vendre);
-
+		
+//		JTextArea notif = new JTextArea("=====> Notification <===== \n");
+//		notif.setBackground(Color.white);
+//		notif.setBounds(0, partie.getTerrain().getLargeur()*108,partie.getTerrain().getLongueur()*100/2,130);
+//		notif.setEditable(false);
+//		JScrollPane actionScroll = new JScrollPane(notif, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+//				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+//		this.add(notif);
+//		this.add(actionScroll);
+//		
 		this.acheter.setVisible(false);
 		this.deplacer.setVisible(false);
 		this.vendre.setVisible(false);
@@ -111,30 +123,21 @@ public class TerrainGraphique extends JPanel {
 		this.acheter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				PauseAcheter pause = new PauseAcheter(partie);
-				if (obstaclePause==null) {
-					System.out.println("hummm problem ! ");
-				} else {
-					partie.getJoueur().acheterObstacle(obstaclePause);
-				}
 			}
 		});
 		this.deplacer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				PauseDeplacer pause = new PauseDeplacer(partie);
-				partie.getJoueur().deplacerObstacle(obstaclePause,positionDeDep);
 			}
 		});
 		this.vendre.addActionListener((ActionListener) new ActionListener() {
-			PauseVendreReparer pause = new PauseVendreReparer(partie);
 			public void actionPerformed(ActionEvent event) {
-				partie.getJoueur().vendreObstacle(obstaclePause);
+				PauseVendre pause = new PauseVendre(partie);
 			}
 		});
 		this.reparer.addActionListener(new ActionListener() {
-			PauseVendreReparer pause = new PauseVendreReparer(partie);
 			public void actionPerformed(ActionEvent event) {
-				partie.getJoueur().reparerObstacle(obstaclePause);
-
+				PauseReparer pause = new PauseReparer(partie);
 			}
 		});
 	}

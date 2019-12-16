@@ -46,7 +46,7 @@ public class Enigme {
 		jeu.getElements().add(s.clone());
 
 		// Définition du niveau
-		Niveau niveau = new Niveau("Unique Level", 4, 0, 4);
+		Niveau niveau = new Niveau("Unique Level", 10, 0, 4);
 		// Ajout du niveau à la partie
 		partie.getNiveaux().add(niveau);
 
@@ -135,7 +135,7 @@ public class Enigme {
 		// Définition des lignes de la partie
 		Ligne ligne1 = new Ligne();
 		ligne1.getCases().add(r.clone());
-		ligne1.getCases().add(r.clone());
+		ligne1.getCases().add(g.clone());
 		ligne1.getCases().add(m.clone());
 		ligne1.getCases().add(m.clone());
 		ligne1.getCases().add(m.clone());
