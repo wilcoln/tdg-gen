@@ -19,11 +19,14 @@ public class Enigme {
 		// Définition des élements du  jeu
 		Projectile p1 = new Projectile("p1", 1, 2, 4, 20);
 		Projectile p2 = new Projectile("p2", 1, 1, 1, 5);
+		
 		Mobile mb = new Mobile("mb", 1, 20, 1, 1, TactiqueType.attaquePlusProche);
 		Obstacle o = new Obstacle("o", 10, 1, TactiqueType.attaquePlusFaible);
 		Obstacle o2 = new Obstacle("o2", 10, 1, TactiqueType.attaquePlusFaible);
+		
 		partie.getObstaclesDispoPourVente().add(o.clone());
 		partie.getObstaclesDispoPourVente().add(o2.clone());
+		
 		Chemin r = new Chemin("R", "route", 1, 1);
 		Decoration m = new Decoration("M", "montagne");
 		Campement g = new Campement("G", "garage");
@@ -161,31 +164,7 @@ public class Enigme {
 
 		// Set element.terrain de la partie
 		partie.setTerrain(terrain);
-		Scanner sc = new Scanner(System.in);
 		partie.commencer();
-//		while (i != 1) {
-//			System.out.println("tapez :\n"
-//					+ "1 pour commencer \n"
-//					+ "2 pour afficher le terrain \n"
-//					+ "3 pour afficher les informations sur la partie \n");
-//			try {
-//				i = sc.nextInt();
-//			} catch (Exception e2) {
-//				e2.printStackTrace();
-//			}
-//			switch (i) {
-//			case 1:
-//				partie.commencer();
-//				break;
-//				case 3:
-//				partie.affichageDebutPartie();
-//				break;
-//				case 2:
-//				default:
-//				partie.afficherTerrain();
-//				break;
-//			}
-//		}
 	}
 
 }
