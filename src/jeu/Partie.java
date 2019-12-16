@@ -77,7 +77,7 @@ public class Partie {
         }
         notifications.add(getJaugeEnergieJoueur());
         notifications.add("nb mobiles sortis : " + nbMobilesSortis + " (tolerance = " + getToleranceActuelle() + ")");
-        if(!vagues.get(indiceVagueActuelle).isLancee()){
+        if(indiceVagueActuelle < vagues.size() && !vagues.get(indiceVagueActuelle).isLancee()){
             notifications.clear();
             notifications.add("...\r");
         }
@@ -89,7 +89,7 @@ public class Partie {
         for(int i = 0; i < getJoueur().getEnergie(); i++){
             msg+="#";
         }
-        msg += " ~ " + (getJoueur().getEnergie()) + "\n" ;
+        msg += " : " + (getJoueur().getEnergie()) + "\n" ;
         return msg;
     }
     // P10 P11 P12

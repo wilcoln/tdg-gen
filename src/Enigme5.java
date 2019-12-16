@@ -22,7 +22,7 @@ public class Enigme5 {
 		Projectile P = new Projectile("P",1,1,1,1);
 		jeu.getElements().add(P.clone());
 
-		Mobile MB = new Mobile("MB",1,20,1,1,TactiqueType.attaquePlusFaible);
+		Mobile MB = new Mobile("MB",1,5,1,1,TactiqueType.attaquePlusFaible);
 		jeu.getElements().add(MB.clone());
 
 		Sortie sortie = new Sortie("S","sortie"); 
@@ -74,7 +74,7 @@ public class Enigme5 {
 
 		// Définition des parties
 		Partie partie = new Partie();
-		//partie.getObstaclesDispoPourVentre(O);
+			partie.getObstaclesDispoPourVente().add(O.clone());
 		Niveau unique = new Niveau("unique", 1, 4, 1);
 		partie.getNiveaux().add(unique);
 	
