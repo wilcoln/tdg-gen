@@ -1,8 +1,5 @@
 import java.io.IOException;
-import javax.swing.JOptionPane;
-import config.Config;
 import element.actif.*;
-import graphics.AfficheurGraphique;
 import jeu.*;
 import element.passif.*;
 import utils.Position;
@@ -22,13 +19,13 @@ public class Enigme5 {
 		Projectile P = new Projectile("P",1,1,1,1);
 		jeu.getElements().add(P.clone());
 
-		Mobile MB = new Mobile("MB",1,1,1,1,TactiqueType.attaquePlusFaible);
+		Mobile MB = new Mobile("MB",1,20,1,1,TactiqueType.attaquePlusFaible);
 		jeu.getElements().add(MB.clone());
 
 		Sortie sortie = new Sortie("S","sortie"); 
 		jeu.getElements().add(sortie.clone());
 
-		Obstacle O = new Obstacle("O",1,1,TactiqueType.attaquePlusFaible); 
+		Obstacle O = new Obstacle("O",20,1,TactiqueType.attaquePlusFaible);
 		jeu.getElements().add(O.clone());
 
 		Decoration montagne1 = new Decoration("M","montagne1"); 

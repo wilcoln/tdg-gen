@@ -1,6 +1,5 @@
 package jeu;
 
-import element.actif.Mobile;
 import graphics.AfficheurGraphique;
 import utils.Position;
 
@@ -71,20 +70,21 @@ public class Afficheur {
         }
     }
 
-	public void activerPause() {
-		this.afficheurGraphique.activerPause();
+	public void afficherMenuPause() {
+		this.afficheurGraphique.afficherMenuPause();
 		pauseActivee = true;
 	}
 
-    public void desactiverPauseIfActivee() {
+    public void cacherMenuPauseSiAffiche() {
         if(pauseActivee){
-            afficheurGraphique.desactiverPause();
+            afficheurGraphique.cacherMenuPause();
             pauseActivee = false;
         }
     }
 
-    public void afficherNotifs(Partie partie) {
+    public void afficherNotifs() {
         for(String notif: partie.getNotifications())
             System.out.println(notif);
+        partie.getNotifications().clear();
     }
 }

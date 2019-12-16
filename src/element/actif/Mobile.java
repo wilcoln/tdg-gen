@@ -63,7 +63,7 @@ public class Mobile extends Attaquant{
 		if (!isElimine() && !isSorti()) {
 			if(getPosition().equals(posSortie)) {
 				sortir(partie);
-				partie.getNotifications().add("un mobile " + getNom() + " vient de sortir");
+				partie.addNotification("un mobile " + getNom() + " vient de sortir");
 			}
 			else{
 				if(prochainePositionEstAccessible(partie)){
@@ -80,9 +80,7 @@ public class Mobile extends Attaquant{
 				}
 			}
 			if(isElimine())
-				partie.getNotifications().add("un mobile " + getNom() + " éliminé");
-			if(isSorti())
-				partie.getNotifications().add("un mobile " + getNom() + " sorti");
+				partie.addNotification("un mobile " + getNom() + " éliminé");
 		}
 	}
 	public boolean peutEntrer(Partie partie) {
