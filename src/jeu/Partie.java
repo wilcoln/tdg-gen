@@ -89,7 +89,7 @@ public class Partie {
         for(int i = 0; i < getJoueur().getEnergie(); i++){
             msg+="#";
         }
-        msg += " ~ " + (getJoueur().getEnergie()) + "\n" ;
+        msg += " : " + (getJoueur().getEnergie()) + "\n" ;
         return msg;
     }
     // P10 P11 P12
