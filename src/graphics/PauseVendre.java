@@ -14,7 +14,7 @@ import element.actif.Obstacle;
 import graphics.TerrainGraphique;
 import jeu.Partie;
 
-public class PauseVendreReparer {
+public class PauseVendre{
 
 	private JFrame frame;
 	private JComboBox obstacles;
@@ -23,7 +23,7 @@ public class PauseVendreReparer {
 	/**
 	 * Create the application.
 	 */
-	public PauseVendreReparer(Partie p) {
+	public PauseVendre(Partie p) {
 		this.partie = p;
 		initialize();
 	}
@@ -36,7 +36,6 @@ public class PauseVendreReparer {
 		frame.setBounds(100, 100, 200, 100);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel panel = new JPanel();
-		panel.setLayout(new FlowLayout());
 
 		obstacles = new JComboBox(partie.getObstaclesPresents().toArray());
 		panel.add(obstacles);
@@ -45,8 +44,7 @@ public class PauseVendreReparer {
 		bouton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				partie.afficheur.getAfficheurGraphique().getTerrainGraphique()
-						.setObstaclePause(((Obstacle) obstacles.getSelectedItem()));
+				partie.getJoueur().vendreObstacle(((Obstacle) obstacles.getSelectedItem()).clone());
 				frame.setVisible(false);
 			}
 		});

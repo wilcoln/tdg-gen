@@ -16,6 +16,7 @@ import jeu.Partie;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,6 +27,9 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import utils.Position;
 
@@ -55,6 +59,16 @@ public class TerrainGraphique extends JPanel {
 		this.add(this.deplacer);
 		this.add(this.reparer);
 		this.add(this.vendre);
+		this.setLayout(new GridBagLayout());
+		JTextArea notif = new JTextArea("=====> Notification <===== \n");
+		notif.setBackground(Color.white);
+		notif.setBounds(0, partie.getTerrain().getLongueur() * 100, partie.getTerrain().getLongueur() * 100 / 2,
+				partie.getTerrain().getLongueur() * 108 + 130);
+		notif.setEditable(false);
+		JScrollPane actionScroll = new JScrollPane(notif, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		this.add(notif);
+		this.add(actionScroll);
 
 		this.acheter.setVisible(false);
 		this.deplacer.setVisible(false);
@@ -97,11 +111,13 @@ public class TerrainGraphique extends JPanel {
 	}
 
 	public void setObstaclePause(Obstacle o) {
-		this.obstaclePause=o;
+		this.obstaclePause = o;
 	}
+
 	public void setPositonDeplacement(Position p) {
 		this.positionDeDep = p;
 	}
+
 	public void activerPause() {
 		this.acheter.setVisible(true);
 		this.deplacer.setVisible(true);
@@ -111,48 +127,40 @@ public class TerrainGraphique extends JPanel {
 		this.acheter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				PauseAcheter pause = new PauseAcheter(partie);
-				if (obstaclePause==null) {
-					System.out.println("hummm problem ! ");
-				} else {
-					partie.getJoueur().acheterObstacle(obstaclePause);
-				}
 			}
 		});
 		this.deplacer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				PauseDeplacer pause = new PauseDeplacer(partie);
-				partie.getJoueur().deplacerObstacle(obstaclePause,positionDeDep);
 			}
 		});
 		this.vendre.addActionListener((ActionListener) new ActionListener() {
-			PauseVendreReparer pause = new PauseVendreReparer(partie);
 			public void actionPerformed(ActionEvent event) {
-				partie.getJoueur().vendreObstacle(obstaclePause);
+				PauseVendre pause = new PauseVendre(partie);
 			}
 		});
 		this.reparer.addActionListener(new ActionListener() {
-			PauseVendreReparer pause = new PauseVendreReparer(partie);
 			public void actionPerformed(ActionEvent event) {
-				partie.getJoueur().reparerObstacle(obstaclePause);
-
+				PauseReparer pause = new PauseReparer(partie);
 			}
 		});
 	}
+
 	public void desactiverPause() {
 		this.acheter.setVisible(false);
 		this.deplacer.setVisible(false);
 		this.vendre.setVisible(false);
 		this.reparer.setVisible(false);
-		for (ActionListener l:this.acheter.getActionListeners()) {
+		for (ActionListener l : this.acheter.getActionListeners()) {
 			this.acheter.removeActionListener(l);
 		}
-		for (ActionListener l:this.deplacer.getActionListeners()) {
+		for (ActionListener l : this.deplacer.getActionListeners()) {
 			this.deplacer.removeActionListener(l);
 		}
-		for (ActionListener l:this.reparer.getActionListeners()) {
+		for (ActionListener l : this.reparer.getActionListeners()) {
 			this.reparer.removeActionListener(l);
 		}
-		for (ActionListener l:this.vendre.getActionListeners()) {
+		for (ActionListener l : this.vendre.getActionListeners()) {
 			this.vendre.removeActionListener(l);
 		}
 	}
