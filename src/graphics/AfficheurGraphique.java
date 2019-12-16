@@ -1,5 +1,8 @@
 package graphics;
-
+import java.awt.Container;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.ScrollPane;
 import java.io.IOException;
 
 import javax.swing.*;
@@ -8,24 +11,32 @@ import jeu.Partie;
 
 public class AfficheurGraphique {
 
-	private JFrame frame;
+	private JFrame frameTerrain;
+	private JFrame frameNotif;
 	private TerrainGraphique terrainGraphique;
+	private JTextArea notif;
 	private static Partie partie;
-
+	
 	/**
 	 * Launch the application.
 	 */
 
 	/**
 	 * Create the application.
+	 * 
 	 * @throws IOException
 	 */
 	public AfficheurGraphique(Partie p) throws IOException {
-		frame = new JFrame("TowerDefense Game");
+		frameTerrain = new JFrame("TowerDefense Game");
+		frameNotif = new JFrame("Notifications");
 		partie = p;
-		frame.setBounds(0, 0, partie.getTerrain().getLongueur()*100,partie.getTerrain().getLargeur()*108+130);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frameTerrain.setBounds(0, 0, partie.getTerrain().getLongueur() * 100, partie.getTerrain().getLargeur() * 108);
+		frameNotif.setBounds(100, 100, partie.getTerrain().getLongueur() * 100, partie.getTerrain().getLargeur() * 108);
+		frameTerrain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		terrainGraphique = new TerrainGraphique(p);
+		notif = new JTextArea("=======>NOTIFICATIONS<=====");
+		notif.setBounds(0, 0, partie.getTerrain().getLongueur() * 100, partie.getTerrain().getLargeur() * 108);
+		
 	}
 
 	/**
@@ -33,15 +44,22 @@ public class AfficheurGraphique {
 	 */
 
 	public void afficheTerrain() {
-		frame.setContentPane(terrainGraphique);
-		frame.setVisible(true);
+		afficherNotif();
+		frameTerrain.setContentPane(terrainGraphique);
+		frameTerrain.setVisible(true);
+	}
+	public void afficherNotif() {
+		JScrollPane sp = new JScrollPane();
+		sp.setViewportView(notif);
+		frameNotif.setContentPane(sp);
+		frameNotif.setVisible(true);
 	}
 
 	public void activerPause() {
 		terrainGraphique.activerPause();
 	}
 
-	public void afficheDialog(String message){
+	public void afficheDialog(String message) {
 		JOptionPane.showMessageDialog(null, message);
 	}
 

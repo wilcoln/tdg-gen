@@ -54,18 +54,10 @@ public class TerrainGraphique extends JPanel {
 
 	public TerrainGraphique(Partie partie) throws IOException {
 
-		this.setLayout(new GridBagLayout());
 		this.add(this.acheter);
 		this.add(this.deplacer);
 		this.add(this.reparer);
 		this.add(this.vendre);
-		JTextArea notif = new JTextArea("=====> Notification <===== \n");
-		notif.setBackground(Color.white);
-		notif.setEditable(false);
-		JScrollPane actionScroll = new JScrollPane(notif, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		this.add(notif);
-		this.add(actionScroll);
 
 		this.acheter.setVisible(false);
 		this.deplacer.setVisible(false);
