@@ -35,9 +35,6 @@ public class AfficheurGraphique {
 		frameNotif.setBounds(100, 100, partie.getTerrain().getLongueur() * 100, partie.getTerrain().getLargeur() * 108);
 		frameTerrain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		terrainGraphique = new TerrainGraphique(p);
-		notif = new JTextArea("=======>NOTIFICATIONS<=====");
-		notif.setBounds(0, 0, partie.getTerrain().getLongueur() * 100, partie.getTerrain().getLargeur() * 108);
-		
 	}
 
 	/**
@@ -45,15 +42,8 @@ public class AfficheurGraphique {
 	 */
 
 	public void afficheTerrain() {
-		afficherNotif();
 		frameTerrain.setContentPane(terrainGraphique);
 		frameTerrain.setVisible(true);
-	}
-	public void afficherNotif() {
-		notif.setText("xxzcz");
-		sp.setViewportView(notif);
-		frameNotif.setContentPane(sp);
-		frameNotif.setVisible(true);
 	}
 
 	public void activerPause() {

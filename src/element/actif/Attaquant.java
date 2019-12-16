@@ -135,12 +135,11 @@ public abstract class Attaquant extends Positionable implements Element {
 	}
 
 	public String getEtat(){
-		return	"nom : " + getNom() + "\n" +
-				"Est Vivant :" + !isElimine() + "\n" +
-				"Position : " + getPosition() + "\n" +
-				"energieMax :" + energieMax + "\n" +
-				"energieMaxActuelle : " + energieMaxActuelle + "\n" +
-				"energieDispo : " + energieDispo + "\n" +
-				"tactique : " + tactique;
+		return	"\tnom : " + getNom() + "\n" +
+				"\tPosition : " + getPosition() + "\n" +
+				"\tenergieMax :" + energieMax + "\n" +
+				"\tenergieMaxActuelle : " + energieMaxActuelle + "\n" +
+				"\tenergieDispo : " + energieDispo + "\n" +
+				"\ttactique : " + tactique;
 	}
 }

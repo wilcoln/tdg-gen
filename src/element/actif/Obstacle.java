@@ -16,7 +16,6 @@ public class Obstacle extends Attaquant{
 
 	// P9
 	public void reparer() {
-		// TODO P9 : ok
 		this.setEnergieMaxActuelle(this.getEnergieMax());
 	}
 	
@@ -38,8 +37,10 @@ public class Obstacle extends Attaquant{
 	@Override
 	public void evoluer(Partie partie){
 		super.evoluer(partie);
-		if(isElimine())
+		if(isElimine()){
 			partie.getJoueur().getObstacles().remove(this);
+			partie.getNotifications().add("un obstacle " + getNom() + " éliminé");
+		}
 	}
 	@Override
 	public String getEtat() {

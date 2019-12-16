@@ -15,13 +15,6 @@ public class Vague {
 	private boolean lancee;
 	private int indiceProchainMobile;
 
-    public int getIndiceProchainMobile() {
-		return indiceProchainMobile;
-	}
-
-	public void setIndiceProchainMobile(int indiceProchainMobile) {
-		this.indiceProchainMobile = indiceProchainMobile;
-	}
 	// P5,P6
 
 
@@ -46,10 +39,12 @@ public class Vague {
     public void deployerMobiles(Partie partie) {
         if(!attenteInitailisee){
             if(partie.indiceVagueActuelle > 0)
+				partie.getNotifications().add("Nouvelle vague dans 1 seconde....");
                 partie.afficheur.activerPause();
             attenteInitailisee = true;
             calculCheminDesMobiles(partie);
             debutAttente = System.currentTimeMillis();
+			partie.getNotifications().add("Infos Vague:\n" + getInfos());
         }else{
             long attente = System.currentTimeMillis() - debutAttente;
             if (partie.indiceVagueActuelle == 0 || attente >= partie.getNiveaux().get(partie.indiceNiveauActuel).getDureePause() * 1000) {
@@ -73,14 +68,19 @@ public class Vague {
     public int getEnergieJoueur() {
         return energieJoueur;
     }
-
+	public String getInfos(){
+    	String result = "";
+		for (Mobile m :getMobiles()) {
+			result += m.getEtat();
+		}
+		for (Obstacle o :getObstacles()) {
+			result += o.getEtat();
+		}
+		return result;
+	}
 
 	public boolean echouee(Partie partie) {
 		return mobilesTousEliminesOuSortis() && !partie.defaiteJoueur();
-	}
-
-	public boolean deploye(Partie partie) {
-		return partie.defaiteJoueur() || mobilesTousEliminesOuSortis();
 	}
 
 	public boolean mobilesTousEliminesOuSortis() {
@@ -89,10 +89,6 @@ public class Vague {
 				return false;
 		}
 		return true;
-	}
-
-	public void setEnergieJoueur(int energieJoueur) {
-		this.energieJoueur = energieJoueur;
 	}
 
 	public boolean isLancee() {

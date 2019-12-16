@@ -21,6 +21,11 @@ public class Afficheur {
         afficheurGraphique = new AfficheurGraphique(partie);
     }
     public void afficherTerrain() {
+        affichageTerrainConsole();
+        afficheurGraphique.afficheTerrain();
+    }
+
+    private void affichageTerrainConsole() {
         etatCourant = "";
         for (int i = 0; i < partie.getTerrain().getLargeur(); i++) {
             for (int j = 0; j < partie.getTerrain().getLongueur(); j++) {
@@ -35,12 +40,13 @@ public class Afficheur {
             etatCourant += "\n";
         }
         if (!etatPrec.equals(etatCourant)) {
-            System.out.println("-> ");
+            System.out.println();
             System.out.println(etatCourant);
+            System.out.println();
             etatPrec = etatCourant;
         }
-        afficheurGraphique.afficheTerrain();
     }
+
     public void affichageDebutPartie() {
         System.out.println("Début Partie");
         System.out.println("Nombre de niveaux : " + partie.getNiveaux().size());
@@ -49,7 +55,6 @@ public class Afficheur {
         }
         System.out.println("Nombre de vagues : " + partie.getVagues().size());
         System.out.println("\n----");
-        afficherTerrain();
     }
 
     public void affichageFinPartie() {
@@ -65,35 +70,7 @@ public class Afficheur {
             JOptionPane.showMessageDialog(null, "Le joueur a gagné!");
         }
     }
-    public void afficheDialog(String msg){
-        afficheurGraphique.afficheDialog(msg);
-    }
 
-    public void afficherVagues(){
-        for(int i = 0; i < partie.getVagues().size(); i++) {
-            System.out.println("Vague N°" + (i+1) );
-            System.out.println("===============");
-            afficherMobilesDeLaVague(partie.getVagues().get(i));
-        }
-    }
-
-    public void afficherMobilesDeLaVague(Vague vague) {
-        for (Mobile m : vague.getMobiles()) {
-            System.out.println(m.getEtat());
-        }
-    }
-    public void afficherEnergieJoueur(){
-        String msg ="Energie Joueur : ";
-        for(int i = 0; i < partie.getJoueur().getEnergie(); i++){
-            msg+="#";
-        }
-        msg += "\n";
-        System.out.println(msg);
-    }
-
-    public AfficheurGraphique getAfficheurGraphique() {
-        return afficheurGraphique;
-    }
 	public void activerPause() {
 		this.afficheurGraphique.activerPause();
 		pauseActivee = true;
@@ -104,5 +81,10 @@ public class Afficheur {
             afficheurGraphique.desactiverPause();
             pauseActivee = false;
         }
+    }
+
+    public void afficherNotifs(Partie partie) {
+        for(String notif: partie.getNotifications())
+            System.out.println(notif);
     }
 }

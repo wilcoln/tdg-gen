@@ -22,22 +22,27 @@ public class Partie {
     private List<Projectile> projectilesLances;
     private Joueur joueur;
 	private List<Obstacle> obstaclesDispoPourVente;
+	private List<String> notifications;
 
     public Partie() {
         this.niveaux = new ArrayList<>();
         this.vagues = new ArrayList<>();
         this.projectilesLances = new ArrayList<>();
         this.obstaclesDispoPourVente = new ArrayList<>();
+        this.notifications = new ArrayList<>();
     }
 
     public void commencer() throws IOException {
         joueur = new Joueur(this);
         afficheur = new Afficheur(this);
         afficheur.affichageDebutPartie();
+        int nbTour = 0;
         while (!isOver()) {
+            notifications.add("Tour de jeu n°" + (++nbTour) + "\n================");
             evoluer();
             afficheur.afficherTerrain();
-            afficheur.afficherEnergieJoueur();
+            afficheur.afficherNotifs(this);
+            notifications.clear();
             Timer.attendre(Config.STEP_INTERVAL);
         }
 
@@ -59,7 +64,7 @@ public class Partie {
         vagues.get(indiceVagueActuelle).deployerMobiles(this);
 
         if (vagues.get(indiceVagueActuelle).echouee(this)) {
-            System.out.println("Vague terminée!, début prochaine dans 1 seconde");
+            notifications.add("Vague terminée!");
             joueur.gagneBonusEnergie(vagues.get(indiceVagueActuelle).getEnergieJoueur());
             indiceVagueActuelle++;
         }
@@ -70,9 +75,23 @@ public class Partie {
                 indiceVagueActuelle = 0;
             }
         }
+        notifications.add(getJaugeEnergieJoueur());
+        notifications.add("nb mobiles sortis : " + nbMobilesSortis + " (tolerance = " + getToleranceActuelle() + ")");
+        if(!vagues.get(indiceVagueActuelle).isLancee()){
+            notifications.clear();
+            notifications.add("...\r");
+        }
 
     }
 
+    public String getJaugeEnergieJoueur(){
+        String msg = "Jauge Energie Joueur : ";
+        for(int i = 0; i < getJoueur().getEnergie(); i++){
+            msg+="#";
+        }
+        msg += " ~ " + (getJoueur().getEnergie()) + "\n" ;
+        return msg;
+    }
     // P10 P11 P12
     public boolean isOver() {
         return (indiceNiveauActuel == niveaux.size()) || defaiteJoueur();
@@ -221,4 +240,8 @@ public class Partie {
 	public List<Obstacle> getObstaclesDispoPourVente() {
 		return this.obstaclesDispoPourVente;
 	}
+
+    public List<String> getNotifications() {
+        return notifications;
+    }
 }

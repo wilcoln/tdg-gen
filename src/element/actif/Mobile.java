@@ -61,8 +61,10 @@ public class Mobile extends Attaquant{
 	public void evoluer(Partie partie) {
 		super.evoluer(partie);
 		if (!isElimine() && !isSorti()) {
-			if(getPosition().equals(posSortie))
+			if(getPosition().equals(posSortie)) {
 				sortir(partie);
+				partie.getNotifications().add("un mobile " + getNom() + " vient de sortir");
+			}
 			else{
 				if(prochainePositionEstAccessible(partie)){
 					NatureTerrain nnt = partie.getTerrain().getNatureTerrainAtPosition(chemin.get(indiceProchainePosition));
@@ -77,6 +79,10 @@ public class Mobile extends Attaquant{
 					else indiceProchainePosition++;
 				}
 			}
+			if(isElimine())
+				partie.getNotifications().add("un mobile " + getNom() + " éliminé");
+			if(isSorti())
+				partie.getNotifications().add("un mobile " + getNom() + " sorti");
 		}
 	}
 	public boolean peutEntrer(Partie partie) {
@@ -100,10 +106,10 @@ public class Mobile extends Attaquant{
 	@Override
 	public String getEtat(){
 		return "Mobile \n" + super.getEtat() + "\n" +
-				"Vitesse : " + vitesse + "\n" +
-				"Volume : " + volume + "\n" +
-				"PosEntree : " + posEntree + "\n" +
-				"PosSortie : " + posSortie + "\n";
+				"\tVitesse : " + vitesse + "\n" +
+				"\tVolume : " + volume + "\n" +
+				"\tPosEntree : " + posEntree + "\n" +
+				"\tPosSortie : " + posSortie + "\n";
 
 	}
 
