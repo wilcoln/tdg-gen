@@ -1,6 +1,8 @@
 package jeu;
 
 import graphics.AfficheurGraphique;
+import graphics.javafx.AfficheurFX;
+import graphics.swing.AfficheurSwing;
 import utils.Position;
 
 import javax.swing.*;
@@ -17,11 +19,11 @@ public class Afficheur {
 
     public Afficheur(Partie partie) throws IOException {
         this.partie = partie;
-        afficheurGraphique = new AfficheurGraphique(partie);
+        afficheurGraphique = new AfficheurSwing(partie);
     }
     public void afficherTerrain() {
         affichageTerrainConsole();
-        afficheurGraphique.afficheTerrain();
+        afficheurGraphique.afficherTerrain();
     }
 
     private void affichageTerrainConsole() {
@@ -62,11 +64,9 @@ public class Afficheur {
         System.out.println("Nombre de mobiles sortis : " + partie.getNbMobilesSortis());
         partie.indiceNiveauActuel -= partie.indiceNiveauActuel < partie.getNiveaux().size() ? 0 : 1;
         if (partie.defaiteJoueur()) {
-            System.out.println("Le joueur a perdu!");
-            afficheurGraphique.afficheDialog("Le joueur a perdu!");
+            System.out.println("=== FIN ==> Le joueur a perdu!");
         } else {
-            System.out.println("Le joueur a gagné!");
-            JOptionPane.showMessageDialog(null, "Le joueur a gagné!");
+            System.out.println("=== FIN ==> Le joueur a gagné!");
         }
     }
 

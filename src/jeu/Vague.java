@@ -38,9 +38,10 @@ public class Vague {
     // P5,P6
     public void deployerMobiles(Partie partie) {
         if(!attenteInitailisee){
-            if(partie.indiceVagueActuelle > 0)
+            if(partie.indiceVagueActuelle > 0){
 				partie.addNotification("Nouvelle vague dans 1 seconde....");
-                partie.afficheur.afficherMenuPause();
+				partie.afficheur.afficherMenuPause();
+			}
             attenteInitailisee = true;
             calculCheminDesMobiles(partie);
             debutAttente = System.currentTimeMillis();

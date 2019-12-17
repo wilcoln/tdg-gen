@@ -1,4 +1,4 @@
-package graphics;
+package graphics.swing;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

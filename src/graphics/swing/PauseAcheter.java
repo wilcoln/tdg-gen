@@ -1,5 +1,4 @@
-
-package graphics;
+package graphics.swing;
 
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
@@ -12,19 +11,19 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import element.actif.Obstacle;
-import graphics.TerrainGraphique;
 import jeu.Partie;
 
-public class PauseReparer {
+public class PauseAcheter {
 
 	private JFrame frame;
-	private JComboBox obstacles;
+	private JComboBox<Obstacle> obstacles;
 	private Partie partie;
+
 
 	/**
 	 * Create the application.
 	 */
-	public PauseReparer(Partie p) {
+	public PauseAcheter(Partie p) {
 		this.partie = p;
 		initialize();
 	}
@@ -37,21 +36,20 @@ public class PauseReparer {
 		frame.setBounds(100, 100, 200, 100);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel panel = new JPanel();
-
-		obstacles = new JComboBox(partie.getObstaclesPresents().toArray());
+		
+		obstacles = new JComboBox(partie.getObstaclesDispoPourVente().toArray());
 		panel.add(obstacles);
-
-		JButton bouton = new JButton("Valider");
+		
+		JButton bouton = new JButton("Valider l'achat");
 		bouton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				partie.getJoueur().reparerObstacle(((Obstacle) obstacles.getSelectedItem()).clone());
+				partie.getJoueur().acheterObstacle(((Obstacle) obstacles.getSelectedItem()).clone());
 				frame.setVisible(false);
-			}
+			}	
 		});
 		panel.add(bouton);
 		frame.setContentPane(panel);
 		frame.setVisible(true);
-
 	}
 }

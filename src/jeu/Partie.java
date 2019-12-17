@@ -24,12 +24,15 @@ public class Partie {
 	private List<Obstacle> obstaclesDispoPourVente;
 	private List<String> notifications;
 
+    private boolean enPause;
+
     public Partie() {
         this.niveaux = new ArrayList<>();
         this.vagues = new ArrayList<>();
         this.projectilesLances = new ArrayList<>();
         this.obstaclesDispoPourVente = new ArrayList<>();
         this.notifications = new ArrayList<>();
+        this.enPause = false;
     }
 
     public void commencer() throws IOException {
@@ -38,8 +41,10 @@ public class Partie {
         afficheur.affichageDebutPartie();
         int nbTour = 0;
         while (!isOver()) {
-            notifications.add("Tour de jeu n°" + (++nbTour) + "\n================");
-            evoluer();
+            if(!enPause){
+                notifications.add("Tour de jeu n°" + (++nbTour) + "\n================");
+                evoluer();
+            }
             afficheur.afficherTerrain();
             afficheur.afficherNotifs();
             Timer.attendre(Config.STEP_INTERVAL);
@@ -187,6 +192,30 @@ public class Partie {
         nbMobilesSortis++;
     }
 
+    public String getEtatAtPositionVerbose(Position pos) {
+        StringBuilder etat = new StringBuilder();
+        if (terrain.contientPosition(pos)) {
+            // Ajout de l'état du terrain en la position
+            etat.append("Case " + terrain.getNatureTerrainAtPosition(pos).getNom() + "\n------\n");
+            // Ajout des états des obstacles sur la position
+            for (Attaquant o : getObstaclesPresents()) {
+                if (o.getPosition().equals(pos))
+                    etat.append("-> " + o.getEtat());
+            }
+            // Ajout des états des mobiles sur la position
+            for (Attaquant m : getMobilesPresents()) {
+                if (m.getPosition().equals(pos))
+                    etat.append("-> " + m.getEtat());
+
+            }
+            // Ajout des états des projectiles sur la position
+            for (Projectile proj : getProjectilesPresents()) {
+                if (proj.getPosition().equals(pos))
+                    etat.append("-> " + proj.getEtat());
+            }
+        }
+        return etat.toString();
+    }
     public String getEtatAtPosition(Position pos) {
         StringBuilder etat = new StringBuilder();
         if (terrain.contientPosition(pos)) {
@@ -250,11 +279,18 @@ public class Partie {
         return resultat;
     }
 
+    public void setEnPause(boolean enPause) {
+        this.enPause = enPause;
+    }
 	public List<Obstacle> getObstaclesDispoPourVente() {
 		return this.obstaclesDispoPourVente;
 	}
 
     public List<String> getNotifications() {
         return notifications;
+    }
+
+    public boolean enPause() {
+        return enPause;
     }
 }
