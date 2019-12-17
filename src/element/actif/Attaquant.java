@@ -31,6 +31,7 @@ public abstract class Attaquant extends Positionable implements Element {
 	}
 	public void diminuerEnergieMaxActuelle(int moins){
 		this.energieMaxActuelle-=moins;
+		diminuerEnergieDispo(moins);
 	}
 	public void diminuerEnergieDispo(int moins){
 		this.energieDispo-=moins;

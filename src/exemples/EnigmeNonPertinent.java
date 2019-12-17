@@ -1,10 +1,12 @@
+package exemples;
+
 import java.io.IOException;
 import element.actif.*;
 import jeu.*;
 import element.passif.*;
 import utils.Position;
 
-public class Enigme5 {
+public class EnigmeNonPertinent {
 
 	public static void main(String[] args) throws IOException {
 

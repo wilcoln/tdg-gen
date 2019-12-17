@@ -1,3 +1,5 @@
+package exemples;
+
 import java.io.IOException;
 import javax.swing.JOptionPane;
 import config.Config;
@@ -12,7 +14,7 @@ public class ExempleSujet {
 	public static void main(String[] args) throws IOException {
 
 		// Définition du jeu
-		Jeu jeu = new Jeu("ExempleSujet");
+		Jeu jeu = new Jeu("exemples.ExempleSujet");
 
 		// Définition des élements du  jeu
 		// Ajout des élements dans la liste des élts du jeu

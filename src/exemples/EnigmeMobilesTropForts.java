@@ -1,3 +1,5 @@
+package exemples;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -7,7 +9,7 @@ import element.passif.*;
 import utils.Position;
 
 @SuppressWarnings("unused")
-public class Enigme {
+public class EnigmeMobilesTropForts {
 
 	public static void main(String[] args) throws IOException {
 		// Définition du jeu
@@ -21,8 +23,8 @@ public class Enigme {
 		Projectile p2 = new Projectile("p2", 1, 1, 1, 5);
 		
 		Mobile mb = new Mobile("mb", 1, 20, 1, 1, TactiqueType.attaquePlusProche);
-		Obstacle o = new Obstacle("o", 10, 1, TactiqueType.attaquePlusFaible);
-		Obstacle o2 = new Obstacle("o2", 10, 1, TactiqueType.attaquePlusFaible);
+		Obstacle o = new Obstacle("o", 20, 1, TactiqueType.attaquePlusFaible);
+		Obstacle o2 = new Obstacle("o2", 20, 1, TactiqueType.attaquePlusFaible);
 		
 		partie.getObstaclesDispoPourVente().add(o.clone());
 		partie.getObstaclesDispoPourVente().add(o2.clone());
@@ -65,7 +67,7 @@ public class Enigme {
 
 		Mobile mv1 = mb.clone();
 		mv1.setNom("mb1");
-		mv1.setPosEntree(new Position(2, 1));
+		mv1.setPosEntree(new Position(1, 1));
 		mv1.setPosSortie(new Position(3, 5));
 
 		Mobile mv2 = mb.clone();
@@ -75,7 +77,7 @@ public class Enigme {
 
 		Mobile mv3 = mb.clone();
 		mv3.setNom("mb3");
-		mv3.setPosEntree(new Position(2, 1));
+		mv3.setPosEntree(new Position(1, 1));
 		mv3.setPosSortie(new Position(2, 5));
 
 		// Ajout des éléments dans la vague
@@ -102,7 +104,7 @@ public class Enigme {
 
 		Mobile mv5 = mb.clone();
 		mv5.setNom("mb5");
-		mv5.setPosEntree(new Position(2, 1));
+		mv5.setPosEntree(new Position(1, 1));
 		mv5.setPosSortie(new Position(3, 5));
 
 		Mobile mv6 = mb.clone();
@@ -112,7 +114,7 @@ public class Enigme {
 
 		Mobile mv7 = mb.clone();
 		mv7.setNom("mb7");
-		mv7.setPosEntree(new Position(2, 1));
+		mv7.setPosEntree(new Position(1, 1));
 		mv7.setPosSortie(new Position(2, 5));
 
 		Mobile mv8 = mb.clone();
@@ -138,18 +140,18 @@ public class Enigme {
 
 		// Définition des lignes de la partie
 		Ligne ligne1 = new Ligne();
-		ligne1.getCases().add(r.clone());
+		ligne1.getCases().add(e.clone());
 		ligne1.getCases().add(g.clone());
 		ligne1.getCases().add(m.clone());
 		ligne1.getCases().add(m.clone());
 		ligne1.getCases().add(m.clone());
 
 		Ligne ligne2 = new Ligne();
-		ligne2.getCases().add(e.clone());
+		ligne2.getCases().add(r.clone());
 		ligne2.getCases().add(g.clone());
 		ligne2.getCases().add(r.clone());
 		ligne2.getCases().add(r.clone());
-		ligne2.getCases().add(s.clone());
+		ligne2.getCases().add(r.clone());
 
 		Ligne ligne3 = new Ligne();
 		ligne3.getCases().add(r.clone());
