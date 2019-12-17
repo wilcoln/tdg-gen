@@ -1,19 +1,13 @@
-package exemples;
-
-import element.actif.Mobile;
-import element.actif.Obstacle;
-import element.actif.Projectile;
-import element.actif.TactiqueType;
+import java.io.IOException;
+import javax.swing.JOptionPane;
+import config.Config;
+import element.actif.*;
+import graphics.AfficheurGraphique;
+import jeu.*;
 import element.passif.*;
-import jeu.Jeu;
-import jeu.Niveau;
-import jeu.Partie;
-import jeu.Vague;
 import utils.Position;
 
-import java.io.IOException;
-
-public class EnigmeObstacleAttaquePlusFaible {
+public class EnigmeObstacleAttaquePlusFort {
 
     public static void main(String[] args) throws IOException {
 
@@ -43,7 +37,7 @@ public class EnigmeObstacleAttaquePlusFaible {
         Decoration montagne5 = new Decoration("M","montagne5");
         jeu.getElements().add(montagne5.clone());
 
-        Projectile p = new Projectile("p",1,1,10,40);
+        Projectile p = new Projectile("p",1,1,10,10);
         jeu.getElements().add(p.clone());
 
         Mobile mb1 = new Mobile("mb",1,10,1,1,TactiqueType.attaquePlusProche);
@@ -55,7 +49,7 @@ public class EnigmeObstacleAttaquePlusFaible {
         Mobile mb3 = new Mobile("mb",1,7,1,1,TactiqueType.attaquePlusProche);
         jeu.getElements().add(mb2.clone());
 
-        Obstacle ob = new Obstacle("ob",50,1,TactiqueType.attaquePlusFaible);
+        Obstacle ob = new Obstacle("ob",50,1,TactiqueType.attaquePlusFort);
         jeu.getElements().add(ob.clone());
 
         Chemin route1 = new Chemin("R","route1",1,1);

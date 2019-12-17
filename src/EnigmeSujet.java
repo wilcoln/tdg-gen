@@ -1,5 +1,3 @@
-package exemples;
-
 import java.io.IOException;
 import javax.swing.JOptionPane;
 import config.Config;
@@ -9,12 +7,12 @@ import jeu.*;
 import element.passif.*;
 import utils.Position;
 
-public class ExempleSujet {
+public class EnigmeSujet {
 
 	public static void main(String[] args) throws IOException {
 
 		// Définition du jeu
-		Jeu jeu = new Jeu("exemples.ExempleSujet");
+		Jeu jeu = new Jeu("ExempleSujet");
 
 		// Définition des élements du  jeu
 		// Ajout des élements dans la liste des élts du jeu

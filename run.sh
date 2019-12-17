@@ -2,4 +2,4 @@
 cd src/
 javac *.java */*.java
 
-java exemples.EnigmeNonPertinent
+java EnigmeGrand

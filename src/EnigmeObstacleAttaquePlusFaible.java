@@ -1,5 +1,3 @@
-package exemples;
-
 import element.actif.Mobile;
 import element.actif.Obstacle;
 import element.actif.Projectile;
@@ -13,7 +11,7 @@ import utils.Position;
 
 import java.io.IOException;
 
-public class EnigmeObstacleAttaquePlusProche {
+public class EnigmeObstacleAttaquePlusFaible {
 
     public static void main(String[] args) throws IOException {
 
@@ -55,7 +53,7 @@ public class EnigmeObstacleAttaquePlusProche {
         Mobile mb3 = new Mobile("mb",1,7,1,1,TactiqueType.attaquePlusProche);
         jeu.getElements().add(mb2.clone());
 
-        Obstacle ob = new Obstacle("ob",50,1,TactiqueType.attaquePlusProche);
+        Obstacle ob = new Obstacle("ob",50,1,TactiqueType.attaquePlusFaible);
         jeu.getElements().add(ob.clone());
 
         Chemin route1 = new Chemin("R","route1",1,1);
@@ -93,14 +91,6 @@ public class EnigmeObstacleAttaquePlusProche {
         partie.getNiveaux().add(unique);
 
         Vague v  = new Vague(0);
-
-        Mobile mv3 = mb3.clone();
-        mv3.setNom("mv3");
-        mv3.setPosEntree(new Position(6, 6));
-        mv3.setPosSortie(new Position(3, 6));
-        // Ajout des éléments dans la vague
-        v.getMobiles().add(mv3);
-
         Mobile mv1 = mb1.clone();
         mv1.setNom("mv1");
         mv1.setPosEntree(new Position(2, 1));
@@ -113,6 +103,12 @@ public class EnigmeObstacleAttaquePlusProche {
         mv2.setPosSortie(new Position(2, 7));
         // Ajout des éléments dans la vague
         v.getMobiles().add(mv2);
+        Mobile mv3 = mb3.clone();
+        mv3.setNom("mv3");
+        mv3.setPosEntree(new Position(5, 6));
+        mv3.setPosSortie(new Position(3, 6));
+        // Ajout des éléments dans la vague
+        v.getMobiles().add(mv3);
 
         Obstacle ov = ob.clone();
         ov.setNom("ov");
@@ -187,20 +183,6 @@ public class EnigmeObstacleAttaquePlusProche {
         l4.getCases().add(montagne1.clone());
         l4.getCases().add(montagne1.clone());
         terrain.getLignes().add(l4);
-
-        Ligne l45 = new Ligne();
-        l45.getCases().add(montagne5.clone());
-        l45.getCases().add(montagne4.clone());
-        l45.getCases().add(montagne3.clone());
-        l45.getCases().add(montagne2.clone());
-        l45.getCases().add(montagne1.clone());
-        l45.getCases().add(route1.clone());
-        l45.getCases().add(montagne4.clone());
-        l45.getCases().add(montagne3.clone());
-        l45.getCases().add(montagne2.clone());
-        l45.getCases().add(montagne1.clone());
-        l45.getCases().add(montagne1.clone());
-        terrain.getLignes().add(l45);
 
         Ligne l5 = new Ligne();
         l5.getCases().add(montagne5.clone());

@@ -1,5 +1,3 @@
-package exemples;
-
 import element.actif.Mobile;
 import element.actif.Obstacle;
 import element.actif.Projectile;
@@ -17,7 +15,7 @@ public class EnigmeGrand {
     public static void main(String[] args) throws IOException {
 
             // Définition du jeu
-            Jeu jeu = new Jeu("exemples.EnigmeGrand");
+            Jeu jeu = new Jeu("EnigmeGrand");
 
             // Définition des élements du  jeu
             // Ajout des élements dans la liste des élts du jeu

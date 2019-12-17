@@ -1,5 +1,3 @@
-package exemples;
-
 import element.actif.Mobile;
 import element.actif.Obstacle;
 import element.actif.Projectile;
