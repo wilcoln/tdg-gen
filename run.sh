@@ -2,4 +2,4 @@
 cd src/
 javac *.java */*.java
 
-java EnigmeGrand
+java EnigmeActionsJoueur
