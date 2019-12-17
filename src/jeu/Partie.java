@@ -196,7 +196,7 @@ public class Partie {
         StringBuilder etat = new StringBuilder();
         if (terrain.contientPosition(pos)) {
             // Ajout de l'état du terrain en la position
-            etat.append("Case " + terrain.getNatureTerrainAtPosition(pos).getNom() + "\n------\n");
+            etat.append("Case " + terrain.getNatureTerrainAtPosition(pos).getEtat() + "\n------\n");
             // Ajout des états des obstacles sur la position
             for (Attaquant o : getObstaclesPresents()) {
                 if (o.getPosition().equals(pos))

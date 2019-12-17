@@ -1,5 +1,6 @@
 package config;
 
 public class Config {
-    public static int STEP_INTERVAL = 800;
+    public static final int COUT_DEPLACEMENT_OBSTACLE = 1;
+    public static int STEP_INTERVAL = 900;
 }

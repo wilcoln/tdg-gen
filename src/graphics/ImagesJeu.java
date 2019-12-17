@@ -1,4 +1,4 @@
-package graphics.swing;
+package graphics;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -18,15 +18,15 @@ public class ImagesJeu {
 
     static {
         try {
-            chemin = ImageIO.read(new File("../images/sable.png"));
+            chemin = ImageIO.read(new File("../images/marbre.png"));
 
             File img3 = new File("../images/montagne.png");
             decoration = ImageIO.read(img3);
 
-            File img4 = new File("../images/sable.png");
+            File img4 = new File("../images/anthill.png");
             entree = ImageIO.read(img4);
 
-            File img5 = new File("../images/sable.png");
+            File img5 = new File("../images/algue.png");
             sortie = ImageIO.read(img5);
 
             File img6 = new File("../images/garage.png");

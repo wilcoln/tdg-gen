@@ -28,7 +28,7 @@ public class EnigmePlusieursChemins {
 		Sortie sortie = new Sortie("S","sortie"); 
 		jeu.getElements().add(sortie.clone());
 
-		Obstacle O = new Obstacle("O",1,1,TactiqueType.attaquePlusFaible); 
+		Obstacle O = new Obstacle("O",1,1,TactiqueType.attaquePlusFaible);
 		jeu.getElements().add(O.clone());
 
 		Decoration montagne1 = new Decoration("M","montagne1"); 
@@ -37,16 +37,16 @@ public class EnigmePlusieursChemins {
 		Decoration montagne2 = new Decoration("M","montagne2"); 
 		jeu.getElements().add(montagne2.clone());
 
-		Chemin route1 = new Chemin("R","route1",1,1); 
+		Chemin route1 = new Chemin("R","route1",1,1);
 		jeu.getElements().add(route1.clone());
 
-		Chemin route4 = new Chemin("R","route4",1,1); 
+		Chemin route4 = new Chemin("R","route4",1,1);
 		jeu.getElements().add(route4.clone());
 
-		Chemin route3 = new Chemin("R","route3",1,1); 
+		Chemin route3 = new Chemin("R","route3",1,1);
 		jeu.getElements().add(route3.clone());
 
-		Chemin route6 = new Chemin("R","route6",1,1); 
+		Chemin route6 = new Chemin("R","route6",1,1);
 		jeu.getElements().add(route6.clone());
 
 		Campement garage1 = new Campement("G","garage1"); 

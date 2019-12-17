@@ -29,8 +29,9 @@ public class Joueur {
 			energie -= obstacle.getEnergieDispo();
 			//System.out.println("<++++> un obstacle acheté : "+obstacle.getNom());
 		} else {
-			//TODO show notifications plutôt
-			JOptionPane.showMessageDialog(null, "L'energie du joueur n'est pas suffisante pour effectuer cet achat");
+			String msg = "L'energie du joueur n'est pas suffisante pour effectuer cet achat";
+			JOptionPane.showMessageDialog(null, msg);
+			System.out.println(msg);
 		}
 	}
 
@@ -38,7 +39,9 @@ public class Joueur {
 	public void vendreObstacle(Obstacle obstacle) {
 			obstacles.remove(obstacle);
 			energie += obstacle.getEnergieDispo();
-			// System.out.println("<----> un obstacle vendu : "+obstacle.getNom());
+			String msg = "Un obstacle " + obstacle.getNom() + " vendu";
+			JOptionPane.showMessageDialog(null, msg);
+			System.out.println(msg);
 	}
 
 	// TODO P9
@@ -47,8 +50,8 @@ public class Joueur {
 			obstacle.reparer();
 			energie -= obstacle.coutReparation();
 		} else {
-			JOptionPane.showMessageDialog(null,
-					"L'energie du joueur n'est pas suffisante pour effectuer cet reparation");
+			String msg = "L'energie du joueur n'est pas suffisante pour effectuer cet reparation";
+			JOptionPane.showMessageDialog(null, msg);
 		}
 	}
 	// TODO P15--P17
@@ -58,8 +61,8 @@ public class Joueur {
 				obstacle.setPosition(p);
 				partie.getJoueur().energie -= obstacle.coutReparation();
 		} else {
-			JOptionPane.showMessageDialog(null,
-					"L'energie du joueur n'est pas suffisante pour effectuer ce deplacement");
+			String msg = "L'energie du joueur n'est pas suffisante pour effectuer ce déplacement";
+			JOptionPane.showMessageDialog(null, msg);
 		}
 	}
 

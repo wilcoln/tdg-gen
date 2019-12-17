@@ -64,9 +64,13 @@ public class Afficheur {
         System.out.println("Nombre de mobiles sortis : " + partie.getNbMobilesSortis());
         partie.indiceNiveauActuel -= partie.indiceNiveauActuel < partie.getNiveaux().size() ? 0 : 1;
         if (partie.defaiteJoueur()) {
-            System.out.println("=== FIN ==> Le joueur a perdu!");
+            String msg = "=== FIN ==> Le joueur a perdu!";
+            System.out.println(msg);
+            JOptionPane.showMessageDialog(null, msg);
         } else {
-            System.out.println("=== FIN ==> Le joueur a gagné!");
+            String msg = "=== FIN ==> Le joueur a gagné!";
+            System.out.println(msg);
+            JOptionPane.showMessageDialog(null, msg);
         }
     }
 

@@ -1,5 +1,6 @@
 package element.actif;
 
+import config.Config;
 import jeu.Partie;
 
 public class Obstacle extends Attaquant{
@@ -31,6 +32,9 @@ public class Obstacle extends Attaquant{
 
 	public int coutReparation(){
 		return getEnergieMax() - getEnergieMaxActuelle();
+	}
+	public int coutDeplacement() {
+		return Config.COUT_DEPLACEMENT_OBSTACLE;
 	}
 
 	@Override

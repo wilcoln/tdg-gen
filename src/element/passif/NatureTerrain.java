@@ -22,5 +22,8 @@ public abstract class NatureTerrain implements Element {
 	public void setSymbol(String symbol) {
 		this.symbol = symbol;
 	}
-	
+
+    public String getEtat(){
+		return getNom();
+	}
 }

@@ -18,6 +18,7 @@ public class AfficheurSwing implements AfficheurGraphique {
 		appFrame = new JFrame("TowerDefense Game");
 		partie = p;
 		appFrame.setBounds(100, 100, partie.getTerrain().getLongueur() * 100, partie.getTerrain().getLargeur() * 108);
+		appFrame.setResizable(false);
 		appFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		terrainGraphique = new TerrainGraphique(p);
 		menuGraphique = new MenuGraphique(p);

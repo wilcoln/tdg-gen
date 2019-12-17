@@ -31,6 +31,12 @@ public class Chemin extends NatureTerrain{
 	public Chemin clone(){
 		return new Chemin(getSymbol(), getNom(), getEnergie(), getVolume());
 	}
+	@Override
+	public String getEtat(){
+		return super.getEtat() + "\n" +
+				"\tVolume: " +  getVolume() + "\n" +
+				"\tEnergie: " + getEnergie() + "\n";
+	}
 
 	
 

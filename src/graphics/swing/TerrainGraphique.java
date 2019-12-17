@@ -3,12 +3,11 @@ package graphics.swing;
 import element.actif.Attaquant;
 import element.actif.Projectile;
 import element.passif.*;
+import graphics.ImagesJeu;
 import jeu.Partie;
 
 import java.awt.*;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.swing.JPanel;
 
@@ -29,6 +28,7 @@ public class TerrainGraphique extends JPanel {
 				this.add(caseG);
 			}
 		}
+		this.setOpaque(false);
 	}
 
 	public void refresh() {
@@ -45,6 +45,11 @@ public class TerrainGraphique extends JPanel {
 
 		for (int i = 0; i < terrain.getLargeur(); i++) {
 			for (int j = 0; j < terrain.getLongueur(); j++) {
+				g2d.drawImage(ImagesJeu.campement, j * next, i * next, null);
+			}
+		}
+		for (int i = 0; i < terrain.getLargeur(); i++) {
+			for (int j = 0; j < terrain.getLongueur(); j++) {
 				if (terrain.getNatureTerrainAtIndices(i, j) instanceof Chemin) {
 					g2d.drawImage(ImagesJeu.chemin, j * next, i * next, null);
 				} else if (terrain.getNatureTerrainAtIndices(i, j) instanceof Decoration) {
@@ -55,8 +60,6 @@ public class TerrainGraphique extends JPanel {
 				} else if (terrain.getNatureTerrainAtIndices(i, j) instanceof Sortie) {
 					g2d.drawImage(ImagesJeu.chemin, j * next, i * next, null);
 					g2d.drawImage(ImagesJeu.sortie, j * next, i * next, null);
-				} else if (terrain.getNatureTerrainAtIndices(i, j) instanceof Campement) {
-					g2d.drawImage(ImagesJeu.campement, j * next, i * next, null);
 				}
 			}
 		}
