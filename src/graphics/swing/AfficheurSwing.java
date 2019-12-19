@@ -7,12 +7,19 @@ import javax.swing.*;
 import graphics.AfficheurGraphique;
 import jeu.Partie;
 
+/**
+ * Réalisation swing d'un {@link AfficheurGraphique}
+ *
+ * @author Wilfried L. Bounsi
+ *
+ */
+
 public class AfficheurSwing implements AfficheurGraphique {
 
 	private JFrame appFrame;
 	private TerrainGraphique terrainGraphique;
 	private MenuGraphique menuGraphique;
-	private static Partie partie;
+	private Partie partie;
 
 	public AfficheurSwing(Partie p) throws IOException {
 		appFrame = new JFrame("TowerDefense Game");
@@ -56,17 +63,17 @@ public class AfficheurSwing implements AfficheurGraphique {
 	}
 
 	@Override
-	public void afficherMenuPause() {
+	public void activerActionsPause() {
 		menuGraphique.activerActionsPause();
 	}
 
 	@Override
-	public void cacherMenuPause() {
+	public void desactiverActionsPause() {
 		menuGraphique.desactiverActionsPause();
 	}
 
 	@Override
-	public void afficheDialog(String message) {
+	public void afficherMessage(String message) {
 		JOptionPane.showMessageDialog(null, message);
 	}
 }

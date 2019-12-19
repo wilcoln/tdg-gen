@@ -1,6 +1,10 @@
 package config;
 
+/**
+ * Principale classe permettant la configuration du jeu
+ * @author Wilfried L. Bounsi
+ */
+
 public class Config {
-    public static final int COUT_DEPLACEMENT_OBSTACLE = 1;
-    public static int STEP_INTERVAL = 900;
+    public static int STEP_INTERVAL = 700;
 }

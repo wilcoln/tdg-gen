@@ -8,7 +8,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import element.actif.Obstacle;
+import element.dynamique.Obstacle;
 import jeu.Partie;
 
 public class PauseVendre{

@@ -8,8 +8,8 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import element.actif.Obstacle;
-import element.passif.Campement;
+import element.dynamique.Obstacle;
+import element.statique.Campement;
 import jeu.Partie;
 import utils.Position;
 

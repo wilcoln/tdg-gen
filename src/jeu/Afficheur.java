@@ -1,12 +1,19 @@
 package jeu;
 
 import graphics.AfficheurGraphique;
-import graphics.javafx.AfficheurFX;
 import graphics.swing.AfficheurSwing;
 import utils.Position;
 
 import javax.swing.*;
 import java.io.IOException;
+
+/**
+ * Cette classe est l'afficheur utilisé pour le jeu, elle se charge à la fois de l'affichage graphique et de l'affichage console.
+ * Elle a donc besoin d'un attribut {@link AfficheurGraphique}, ici initialisé à un  {@link AfficheurSwing} dans le constructeur
+ *
+ * @author Wilfried L. Bounsi
+ *
+ */
 
 public class Afficheur {
     // Utile à l'affichage textuelle
@@ -62,8 +69,7 @@ public class Afficheur {
         System.out.println("\n----");
         System.out.println("Partie terminée");
         System.out.println("Nombre de mobiles sortis : " + partie.getNbMobilesSortis());
-        partie.indiceNiveauActuel -= partie.indiceNiveauActuel < partie.getNiveaux().size() ? 0 : 1;
-        if (partie.defaiteJoueur()) {
+        if (partie.perdue()) {
             String msg = "=== FIN ==> Le joueur a perdu!";
             System.out.println(msg);
             JOptionPane.showMessageDialog(null, msg);
@@ -74,14 +80,14 @@ public class Afficheur {
         }
     }
 
-	public void afficherMenuPause() {
-		this.afficheurGraphique.afficherMenuPause();
+	public void activerActionsPause() {
+		this.afficheurGraphique.activerActionsPause();
 		pauseActivee = true;
 	}
 
-    public void cacherMenuPauseSiAffiche() {
+    public void desactiverActionsPauseSiNecessaire() {
         if(pauseActivee){
-            afficheurGraphique.cacherMenuPause();
+            afficheurGraphique.desactiverActionsPause();
             pauseActivee = false;
         }
     }
@@ -90,5 +96,10 @@ public class Afficheur {
         for(String notif: partie.getNotifications())
             System.out.println(notif);
         partie.getNotifications().clear();
+    }
+
+    public void afficherMessage(String msg) {
+        afficheurGraphique.afficherMessage(msg);
+        System.out.println(msg);
     }
 }

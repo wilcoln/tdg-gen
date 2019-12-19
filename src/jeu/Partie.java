@@ -1,19 +1,25 @@
 package jeu;
 
 import config.Config;
-import element.actif.*;
+import element.dynamique.*;
 import utils.Position;
-import element.passif.Terrain;
+import element.statique.Terrain;
 import utils.Timer;
-import utils.Utils;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Cette classe représente une Partie d'un jeu de Tower Defense
+ *
+ * @author Wilfried L. Bounsi
+ *
+ */
+
 public class Partie {
-    public int indiceNiveauActuel;
-    public int indiceVagueActuelle;
+    private int indiceNiveauActuel;
+    private int indiceVagueActuelle;
     public Afficheur afficheur;
     private Terrain terrain;
     private List<Niveau> niveaux;
@@ -23,6 +29,7 @@ public class Partie {
     private Joueur joueur;
 	private List<Obstacle> obstaclesDispoPourVente;
 	private List<String> notifications;
+	private int nbTour;
 
     private boolean enPause;
 
@@ -33,16 +40,16 @@ public class Partie {
         this.obstaclesDispoPourVente = new ArrayList<>();
         this.notifications = new ArrayList<>();
         this.enPause = false;
+        this.nbTour = 0;
     }
 
     public void commencer() throws IOException {
         joueur = new Joueur(this);
         afficheur = new Afficheur(this);
         afficheur.affichageDebutPartie();
-        int nbTour = 0;
-        while (!isOver()) {
+        while (!terminee()) {
             if(!enPause){
-                notifications.add("Tour de jeu n°" + (++nbTour) + "\n================");
+                nbTour++;
                 evoluer();
             }
             afficheur.afficherTerrain();
@@ -54,6 +61,7 @@ public class Partie {
     }
 
     public void evoluer() {
+        notifications.add("Tour de jeu n°" + nbTour + "\n================");
 
         for (Projectile proj : getProjectilesPresents()) {
             proj.evoluer(this);
@@ -69,17 +77,17 @@ public class Partie {
 
         if (getVagueActuelle().echouee(this)) {
             notifications.add("Vague terminée!");
-            joueur.gagneBonusEnergie(getVagueActuelle().getEnergieJoueur());
+            joueur.gagneBonusEnergie(getVagueActuelle().getBonusEnergie());
             indiceVagueActuelle++;
         }
         if (indiceVagueActuelle == vagues.size()) {
-            joueur.setEnergieInitialeDuNiveau(niveaux.get(indiceNiveauActuel));
+            joueur.setEnergieInitialeDuNiveau(getNiveauActuel());
             indiceNiveauActuel++;
-            if (!isOver()) {
+            if (!terminee()) {
                 indiceVagueActuelle = 0;
             }
         }
-        notifications.add(getJaugeEnergieJoueur());
+        notifications.add(joueur.getJaugeEnergieJoueur());
         notifications.add("nb mobiles sortis : " + nbMobilesSortis + " (tolerance = " + getToleranceActuelle() + ")");
         if(indiceVagueActuelle < vagues.size() && !getVagueActuelle().isLancee()){
             notifications.clear();
@@ -88,17 +96,17 @@ public class Partie {
 
     }
 
-    public String getJaugeEnergieJoueur(){
-        String msg = "Jauge Energie Joueur : ";
-        for(int i = 0; i < getJoueur().getEnergie(); i++){
-            msg+="#";
-        }
-        msg += " : " + (getJoueur().getEnergie()) + "\n" ;
-        return msg;
+    public int getIndiceVagueActuelle() {
+        return indiceVagueActuelle;
     }
+
+    public Niveau getNiveauActuel(){
+        return niveaux.get(getIndiceNiveauActuel());
+    }
+
     // P10 P11 P12
-    public boolean isOver() {
-        return (indiceNiveauActuel == niveaux.size()) || defaiteJoueur();
+    public boolean terminee() {
+        return (indiceNiveauActuel == niveaux.size()) || perdue();
     }
 
     public Terrain getTerrain() {
@@ -119,7 +127,7 @@ public class Partie {
 
     public List<Attaquant> getMobilesPresents() {
         List<Attaquant> resultats = new ArrayList<>();
-        if (!isOver()) {
+        if (!terminee()) {
             Vague vagueActuel = getVagueActuelle();
             for (Mobile m : vagueActuel.getMobiles()) {
                 if (!m.isSorti() && !m.isElimine() && terrain.contientPosition(m.getPosition()))
@@ -131,7 +139,7 @@ public class Partie {
 
     public List<Attaquant> getObstaclesPresents() {
         List<Attaquant> resultats = new ArrayList<>();
-        if (!isOver()) {
+        if (!terminee()) {
             if (getVagueActuelle().isLancee()) {
                 for (Obstacle obstacle : getVagueActuelle().getObstacles()) {
                     if (!obstacle.isElimine()) {
@@ -151,13 +159,13 @@ public class Partie {
 
     private Vague getVagueActuelle() {
         if(indiceVagueActuelle < vagues.size())
-            return vagues.get(indiceVagueActuelle);
+            return vagues.get(getIndiceVagueActuelle());
         return null;
     }
 
     public List<Projectile> getProjectilesPresents() {
         List<Projectile> resultats = new ArrayList<>();
-        if (!isOver()) {
+        if (!terminee()) {
             for (Projectile p : projectilesLances) {
                 if (!p.isElimine())
                     resultats.add(p);
@@ -170,18 +178,21 @@ public class Partie {
         return joueur;
     }
 
-    public boolean defaiteJoueur() {
+    public boolean perdue() {
         return getNbMobilesSortis() > getToleranceActuelle();
     }
 
     private int getToleranceActuelle() {
-        if (indiceNiveauActuel < niveaux.size()) {
-            int toleranceActuelle = 0;
-            for (int i = 0; i <= indiceNiveauActuel; i++)
-                toleranceActuelle += niveaux.get(i).getToleranceMobiles();
-            return toleranceActuelle;
-        }
-        return Integer.MAX_VALUE;
+        int toleranceActuelle = 0;
+        for (int i = 0; i <= getIndiceNiveauActuel(); i++)
+            toleranceActuelle += niveaux.get(i).getToleranceMobiles();
+        return toleranceActuelle;
+    }
+
+    private int getIndiceNiveauActuel() {
+        if(indiceNiveauActuel < niveaux.size())
+            return indiceNiveauActuel;
+        return indiceNiveauActuel - 1;
     }
 
     public int getNbMobilesSortis() {

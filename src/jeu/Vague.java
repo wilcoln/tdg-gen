@@ -1,22 +1,26 @@
 package jeu;
 
-import element.actif.Mobile;
-import element.actif.Obstacle;
+import element.dynamique.Mobile;
+import element.dynamique.Obstacle;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Cette classe représente une Vague d'une partie d'un jeu de Tower Defense
+ *
+ * @author Wilfried L. Bounsi
+ *
+ */
+
 public class Vague {
-	private int energieJoueur;
+	private int bonusEnergie;
 	private List<Obstacle> obstacles;
 	private List<Mobile> mobiles;
 	private boolean attenteInitailisee;
 	private Long debutAttente;
 	private boolean lancee;
 	private int indiceProchainMobile;
-
-	// P5,P6
-
 
 	private void calculCheminDesMobiles(Partie partie) {
 		for (Mobile mobile : mobiles) {
@@ -27,20 +31,20 @@ public class Vague {
 	public List<Obstacle> getObstacles() {
 		return obstacles;
 	}
-    public Vague(int energieJoueur) {
+    public Vague(int bonusEnergie) {
 
-        this.energieJoueur = energieJoueur;
+        this.bonusEnergie = bonusEnergie;
         this.mobiles = new ArrayList<>();
         this.obstacles = new ArrayList<>();
         indiceProchainMobile = 0; // Aucun mobile déployé au début
     }
 
-    // P5,P6
+
     public void deployerMobiles(Partie partie) {
         if(!attenteInitailisee){
-            if(partie.indiceVagueActuelle > 0){
+            if(partie.getIndiceVagueActuelle() > 0){
 				partie.addNotification("Nouvelle vague dans 1 seconde....");
-				partie.afficheur.afficherMenuPause();
+				partie.afficheur.activerActionsPause();
 			}
             attenteInitailisee = true;
             calculCheminDesMobiles(partie);
@@ -48,8 +52,8 @@ public class Vague {
 			partie.addNotification("Infos Vague:\n" + getInfos());
         }else{
             long attente = System.currentTimeMillis() - debutAttente;
-            if (partie.indiceVagueActuelle == 0 || attente >= partie.getNiveaux().get(partie.indiceNiveauActuel).getDureePause() * 1000) {
-                partie.afficheur.cacherMenuPauseSiAffiche();
+            if (partie.getIndiceVagueActuelle() == 0 || attente >= partie.getNiveauActuel().getDureePause() * 1000) {
+                partie.afficheur.desactiverActionsPauseSiNecessaire();
                 lancee = true;
                 if (indiceProchainMobile < mobiles.size()) {
                     if (mobiles.get(indiceProchainMobile).peutEntrer(partie)) {
@@ -66,9 +70,10 @@ public class Vague {
         return mobiles;
     }
 
-    public int getEnergieJoueur() {
-        return energieJoueur;
+    public int getBonusEnergie() {
+        return bonusEnergie;
     }
+
 	public String getInfos(){
     	String result = "";
 		for (Mobile m :getMobiles()) {
@@ -81,7 +86,7 @@ public class Vague {
 	}
 
 	public boolean echouee(Partie partie) {
-		return mobilesTousEliminesOuSortis() && !partie.defaiteJoueur();
+		return mobilesTousEliminesOuSortis() && !partie.perdue();
 	}
 
 	public boolean mobilesTousEliminesOuSortis() {

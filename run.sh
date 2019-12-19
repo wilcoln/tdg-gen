@@ -1,5 +1,4 @@
 ./clean.sh
 cd src/
-javac *.java */*.java
-
-java EnigmeActionsJoueur
+javac exemples/$1.java
+java exemples.$1

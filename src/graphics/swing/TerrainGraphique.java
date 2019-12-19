@@ -1,8 +1,8 @@
 package graphics.swing;
 
-import element.actif.Attaquant;
-import element.actif.Projectile;
-import element.passif.*;
+import element.dynamique.Attaquant;
+import element.dynamique.Projectile;
+import element.statique.*;
 import graphics.ImagesJeu;
 import jeu.Partie;
 

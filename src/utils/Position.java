@@ -3,6 +3,13 @@ package utils;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Cette classe représente un vecteur position en 2D
+ *
+ * @author Wilfried L. Bounsi
+ *
+ */
+
 public class Position {
 
 	private int x = -1;

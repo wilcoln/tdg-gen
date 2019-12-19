@@ -1,7 +1,5 @@
 package graphics.swing;
 
-import element.actif.Attaquant;
-import element.passif.*;
 import jeu.Partie;
 import utils.Position;
 
