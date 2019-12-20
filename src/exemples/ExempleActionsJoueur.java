@@ -1,17 +1,12 @@
 package exemples;
 
-import element.dynamique.Mobile;
-import element.dynamique.Obstacle;
-import element.dynamique.Projectile;
-import element.dynamique.TactiqueType;
-import element.statique.*;
-import jeu.Jeu;
-import jeu.Niveau;
-import jeu.Partie;
-import jeu.Vague;
-import utils.Position;
-
 import java.io.IOException;
+import utils.Position;
+import element.dynamique.*;
+import element.statique.*;
+import jeu.*;
+
+
 
 @SuppressWarnings("unused")
 public class ExempleActionsJoueur {

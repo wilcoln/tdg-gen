@@ -11,18 +11,11 @@ import element.Element;
  */
 
 public abstract class NatureTerrain extends Element {
-	private String nom; // label
 	private String symbol; // name
 	
 	public NatureTerrain(String symbol, String nom) {
 		super(nom);
 		this.symbol = symbol;
-	}
-	public String getNom() {
-		return nom;
-	}
-	public void setNom(String nom) {
-		this.nom = nom;
 	}
 	public String getSymbol() {
 		return symbol;
